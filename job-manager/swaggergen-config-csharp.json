@@ -1,0 +1,10 @@
+{
+  "modelPackage" : "Model",
+  "apiPackage"   : "Api",
+  "invokerPackage" : "Boot",
+  "groupId" : "Compute",
+  "artifactId"  : "JobManager",
+  "serverPort"	: 8090,
+  "hideGenerationTimestamp": true,
+  "generateJbossDeploymentDescriptor": true
+}

@@ -1,0 +1,6 @@
+six
+urllib3
+boto3
+requests
+certifi
+pydantic

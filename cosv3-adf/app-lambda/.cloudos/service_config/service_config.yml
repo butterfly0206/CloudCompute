@@ -1,0 +1,26 @@
+completionLambda:
+  lambda_function_name: "fpccomp-c-uw2_completionLambda"
+  lambda_handler: "com.autodesk.compute.completionhandler.SFNCompletionHandler::Handler"
+  lambda_runtime: "java11"
+  lambda_bg_healthcheck_payload_in: { "Healthcheck": "Healthcheck" }
+  lambda_bg_healthcheck_payload_out: "HealthcheckPassed!"
+  lambda_memory: 1024
+  lambda_timeout: 300
+
+testJobsLambda:
+  lambda_function_name: "fpccomp-c-uw2_testJobsLambda"
+  lambda_handler: "com.autodesk.compute.testlambda.TestLambdaHandler::handleRequest"
+  lambda_runtime: "java11"
+  lambda_bg_healthcheck_payload_in: { "Healthcheck": "Healthcheck" }
+  lambda_bg_healthcheck_payload_out: "HealthcheckPassed!"
+  lambda_memory: 1024
+  lambda_timeout: 900
+
+cleanupLambda:
+  lambda_function_name: "fpccomp-c-uw2_cleanupLambda"
+  lambda_handler: "clean_resources.lambda_handler"
+  lambda_runtime: "python3.7"
+  lambda_bg_healthcheck_payload_in: { "Healthcheck": "Healthcheck" }
+  lambda_bg_healthcheck_payload_out: "HealthcheckPassed!"
+  lambda_memory: 1024
+  lambda_timeout: 900

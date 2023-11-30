@@ -1,0 +1,10 @@
+{
+  "modelPackage": "com.autodesk.compute.common.model",
+  "apiPackage": "com.autodesk.compute.jobmanager.api",
+  "invokerPackage": "com.autodesk.compute.jobmanager.boot",
+  "groupId": "com.autodesk.compute",
+  "artifactId": "jobmanager",
+  "serverPort": 8090,
+  "hideGenerationTimestamp": true,
+  "generateJbossDeploymentDescriptor": true
+}

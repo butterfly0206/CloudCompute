@@ -1,0 +1,32 @@
+[requires]
+python_version = '3.10'
+
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[[source]]
+url = "https://art-bobcat.autodesk.com/artifactory/api/pypi/autodesk-pypi/simple"
+name = "bobcat"
+
+[packages]
+boto3 = "*"
+iso8601 = "*"
+more-itertools = "*"
+requests = "*"
+pytz = "*"
+pyyaml = "*"
+bravado = "*"
+"bravado[fido]" = "*"
+"fido[tls]" = "*"
+crochet = "*"
+jsonschema = "<4.0"
+asgiref = "*"
+tenacity = "*"
+compute = {index = "bobcat"}
+certifi = "*"
+
+[dev-packages]
+pyinstaller = "*"
+pylint = "*"

@@ -1,0 +1,30 @@
+# escape=`
+FROM artifactory.dev.adskengineer.net/autodeskcloud/cloudosv2-windows-base/python3.8-builder-1809-hardened-base:latest AS builder
+# The MAINTAINER keyword is deprecated in favor of LABEL, but we include both because
+# the Codacy scanner hasn't been updated to recognize "LABEL"
+MAINTAINER "cloudos-engg@autodesk.com"
+LABEL maintainer="cloudos-engg@autodesk.com"
+USER ContainerAdministrator
+RUN setx /M PATH $('C:\Users\ContainerUser\AppData\Roaming\Python\Python38\Scripts;' + $Env:PATH)
+
+WORKDIR /app
+COPY worker/Pipfile .
+
+USER ContainerUser
+RUN python -m pip install --user pipenv certifi
+RUN python -m pipenv install
+
+# trim off builder and copy resources
+FROM artifactory.dev.adskengineer.net/autodeskcloud/cloudosv2-windows-base/nanoserver-1809-beta-hardened-base:latest
+COPY --from=builder /Python /Python
+COPY --from=builder C:\Users\ContainerUser\.virtualenvs\ /app/virtualenv/
+
+WORKDIR /app
+COPY ["swagger/2.0/worker-manager.yaml",`
+        "worker/src/main/worker.py", `
+        "worker/src/main/input-schema.json",`
+        "worker/app.sh",`
+        "worker/startup.bat",`
+        "./"]
+
+CMD [ "startup.bat", "worker.py" ]

@@ -1,0 +1,15 @@
+exclude_paths:
+  - 'common/src/gen/**'
+  - 'common/**/test/**'
+  - 'completion-handler/**/test/**'
+  - 'job-manager/src/gen/**'
+  - 'job-manager/**/test/**'
+  - 'test-lambda/**/test/**'
+  - 'test-lambda/jmclient/**'
+  - 'worker-manager/src/gen/**'
+  - 'worker-manager/**/test/**'
+  - 'test-common/**/test/**'
+  - 'test/**/jmclient/**'
+  - 'test/**/wmclient/**'
+
+

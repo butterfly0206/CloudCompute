@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.autodesk.forge</groupId>
+        <artifactId>compute</artifactId>
+        <version>1.0</version>
+    </parent>
+    <groupId>com.autodesk.forge</groupId>
+    <artifactId>coverage</artifactId>
+    <version>1.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.autodesk.forge</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.autodesk.forge</groupId>
+            <artifactId>jobmanager</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.autodesk.forge</groupId>
+            <artifactId>workermanager</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>compute</groupId>
+            <artifactId>completion-lambda</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>compute</groupId>
+            <artifactId>test-lambda</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!-- el-api 5.0.0 vs 5.0.1: exclude 5.0.0 here -->
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>jakarta.el</groupId>
+                    <artifactId>jakarta.el-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jacoco-dependency-ant</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>process-test-resources</phase>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.ant</artifactId>
+                                    <version>${jacoco.plugin.version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.core</artifactId>
+                                    <version>${jacoco.plugin.version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jacoco</groupId>
+                                    <artifactId>org.jacoco.report</artifactId>
+                                    <version>${jacoco.plugin.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                            <stripVersion>true</stripVersion>
+                            <outputDirectory>${basedir}/target/jacoco-jars</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${antrun.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Execute an ant task within maven -->
+                                <echo message="Generating JaCoCo Reports " />
+                                <taskdef name="report" classname="org.jacoco.ant.ReportTask">
+                                    <classpath path="${basedir}/target/jacoco-jars/*.jar" />
+                                </taskdef>
+                                <taskdef name="merge" classname="org.jacoco.ant.MergeTask">
+                                    <classpath path="${basedir}/target/jacoco-jars/*.jar" />
+                                </taskdef>
+                                <report>
+                                    <executiondata>
+                                        <fileset dir="${basedir}">
+                                            <include name="jacoco.exec"/>
+                                        </fileset>
+                                    </executiondata>
+                                    <structure name="Compute Coverage Project">
+                                        <classfiles>
+                                            <fileset dir="${classes.directory.common}" excludes="**/gen/**,**/model/**,**/api/*.class" />
+                                            <fileset dir="${classes.directory.job-manager}" excludes="**/gen/**,**/api/*.class" />
+                                            <fileset dir="${classes.directory.worker-manager}" excludes="**/gen/**,**/api/*.class"/>
+                                            <fileset dir="${classes.directory.test-lambda}" excludes="**/gen/**,**/model/**" />
+                                            <fileset dir="${classes.directory.completion-lambda}" excludes="**/gen/**" />
+                                        </classfiles>
+                                        <sourcefiles encoding="UTF-8">
+                                            <fileset dir="${sources.directory.common}" excludes="**/gen/**,**/model/**"/>
+                                            <fileset dir="${sources.directory.job-manager}" excludes="**/gen/**" />
+                                            <fileset dir="${sources.directory.worker-manager}" excludes="**/gen/**"/>
+                                            <fileset dir="${sources.directory.test-lambda}" excludes="**/gen/**,**/model/**" />
+                                            <fileset dir="${sources.directory.completion-lambda}" excludes="**/gen/**" />
+                                        </sourcefiles>
+                                    </structure>
+                                    <html destdir="${basedir}/target/coverage-report/html" />
+                                    <xml destfile="${basedir}/target/coverage-report/coverage-report.xml" />
+                                    <csv destfile="${basedir}/target/coverage-report/coverage-report.csv" />
+                                </report>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>org.jacoco.ant</artifactId>
+                        <version>${jacoco.plugin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <rules.folder>${project.parent.basedir}</rules.folder>
+        <jacoco.plugin.version>0.8.10</jacoco.plugin.version>
+        <antrun.plugin.version>3.1.0</antrun.plugin.version>
+        <build.directory.common>${basedir}/../common/target</build.directory.common>
+        <build.directory.job-manager>${basedir}/../job-manager/target</build.directory.job-manager>
+        <build.directory.worker-manager>${basedir}/../worker-manager/target</build.directory.worker-manager>
+        <build.directory.test-lambda>${basedir}/../test-lambda/target</build.directory.test-lambda>
+        <classes.directory.common>${basedir}/../common/target/classes</classes.directory.common>
+        <classes.directory.common>${basedir}/../common/target/classes</classes.directory.common>
+        <classes.directory.job-manager>${basedir}/../job-manager/target/classes</classes.directory.job-manager>
+        <classes.directory.worker-manager>${basedir}/../worker-manager/target/classes</classes.directory.worker-manager>
+        <classes.directory.test-lambda>${basedir}/../test-lambda/target/classes</classes.directory.test-lambda>
+        <classes.directory.completion-lambda>${basedir}/../completion-lambda/target/classes</classes.directory.completion-lambda>
+        <sources.directory.common>${basedir}/../common/src/main/java</sources.directory.common>
+        <sources.directory.job-manager>${basedir}/../job-manager/src/main/java</sources.directory.job-manager>
+        <sources.directory.worker-manager>${basedir}/../worker-manager/src/main/java</sources.directory.worker-manager>
+        <sources.directory.test-lambda>${basedir}/../test-lambda/src/main/java</sources.directory.test-lambda>
+        <sources.directory.completion-lambda>${basedir}/../completion-lambda/src/main/java</sources.directory.completion-lambda>
+        <generated-sources.directory.job-manager>${basedir}/../job-manager/src/gen/java</generated-sources.directory.job-manager>
+        <generated-sources.directory.worker-manager>${basedir}/../worker-manager/src/gen/java</generated-sources.directory.worker-manager>
+        <generated-sources.directory.test-lambda>${basedir}/../test-lambda/jmclient/src/main</generated-sources.directory.test-lambda>
+    </properties>
+</project>

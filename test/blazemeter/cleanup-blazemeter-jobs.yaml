@@ -1,0 +1,26 @@
+settings:
+  default-executor: jmeter
+  modules:
+    jmeter:
+        path: ~/.bzt/jmeter-taurus/bin/jmeter
+        download-link: https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-{version}.zip
+        version: 5.2.1  # minimal supported version of JMeter is 2.9
+        force-ctg: true   # true by default
+        detect-plugins: true
+        plugins:
+        - jpgc-json=2.2
+        - jmeter-ftp
+        - jpgc-casutg
+        properties:                  
+            log_level.jmeter: WARN
+            log_level.jmeter.threads: DEBUG
+            sample_variables: count200,count4xx,count5xx
+
+execution:
+- scenario: cleanup
+  concurrency: 1
+  iterations: 1
+
+scenarios:
+  cleanup:
+    script: cleanup-blazemeter-jobs.jmx

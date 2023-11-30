@@ -1,0 +1,380 @@
+definitions:
+  Worker:
+    type: object
+    required:
+      - service
+      - worker
+    properties:
+      service:
+        type: string
+        description: An appdef moniker
+        example: amktool-c-uw2
+      worker:
+        type: string
+        description: The particular worker within a service
+        example: path-gen
+      portfolioVersion:
+        type: string
+        description: The portfolio version of the worker
+        example: 1.0.46
+  PollResponse:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+      - payload
+    allOf:
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          jobSecret:
+            type: string
+            example: >-
+              8m7G_BwHQZyQ_jYVF9VZbjIyR2s4QTFhcTdIMUdHNUE3K0NDYnBpZ3JoOHRtNUl2cmVoc0lsR1pzajFxMD0
+          payload:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"inputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+          tags:
+            type: array
+            items:
+              type: string
+            example:
+              - simulation
+              - bicycles
+  PollForJob:
+    type: object
+    allOf:
+      - $ref: '#/definitions/Worker'
+  Conclusion:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+      - status
+    allOf:
+      - $ref: '#/definitions/Result'
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          jobSecret:
+            type: string
+            example: >-
+              8m7G_BwHQZyQ_jYVF9VZbjIyR2s4QTFhcTdIMUdHNUE3K0NDYnBpZ3JoOHRtNUl2cmVoc0lsR1pzajFxMD0
+          status:
+            $ref: '#/definitions/Status'
+  Heartbeat:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+    properties:
+      jobID:
+        type: string
+        pattern: >-
+          [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      jobSecret:
+        type: string
+        example: >-
+          8m7G_BwHQZyQ_jYVF9VZbjIyR2s4QTFhcTdIMUdHNUE3K0NDYnBpZ3JoOHRtNUl2cmVoc0lsR1pzajFxMD0
+  HeartbeatResponse:
+    type: object
+    properties:
+      canceled:
+        type: boolean
+  TokenResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  NoTokenResponse:
+    type: object
+    properties:
+      message:
+        type: string
+  JobProgress:
+    type: object
+    properties:
+      percent:
+        type: integer
+        example: 74
+      details:
+        description: >-
+          Arbitrary Json data, conforming to a schema associated with the
+          application definition
+        type: object
+        example: >-
+          {"preview":
+          "https://developer-dev.api.autodesk.com/oss/v2/buckets/1/preview.jpg"}
+  Progress:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+    allOf:
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          jobSecret:
+            type: string
+            example: >-
+              8m7G_BwHQZyQ_jYVF9VZbjIyR2s4QTFhcTdIMUdHNUE3K0NDYnBpZ3JoOHRtNUl2cmVoc0lsR1pzajFxMD0
+      - $ref: '#/definitions/JobProgress'
+  Status:
+    type: string
+    enum:
+      - CREATED
+      - QUEUED
+      - SCHEDULED
+      - INPROGRESS
+      - COMPLETED
+      - CANCELED
+      - FAILED
+      - UNKNOWN
+  Result:
+    allOf:
+      - $ref: '#/definitions/Success'
+      - $ref: '#/definitions/Failure'
+  Failure:
+    properties:
+      error:
+        type: string
+        description: Error enum or a short description of the error
+        example: INVALID_MODEL
+      details:
+        type: object
+        description: >
+          Any specific details around the error thrown. These will be provided
+          to the client
+        example:
+          boundingBox:
+            min:
+              x: 10
+              'y': 20
+            max:
+              x: 40
+              'y': 60
+      timestamp:
+        type: string
+        description: The ISO8601 timestamp when the error occured.
+  Success:
+    properties:
+      result:
+        type: object
+        example:
+          outputFilePath: >-
+            https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile02.txt
+  HealthCheckResponse:
+    type: object
+    required:
+      - scanTime
+      - overall
+    properties:
+      portfolioVersion:
+        type: string
+        description: The portfolio version of the worker
+        example: 1.0.46
+      overall:
+        type: string
+        enum:
+          - HEALTHY
+          - UNHEALTHY
+          - DEGRADED
+        description: >-
+          The overall health of the compute service (worker manager or job
+          manager)
+      scanTime:
+        type: string
+        description: The ISO8601 timestamp representing the start of the healthcheck
+      revision:
+        type: string
+        description: Current build version\
+  Error:
+    required:
+      - code
+      - description
+      - message
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      message:
+        type: string
+      details:
+        type: object
+      requestContext:
+        type: object
+      stackTrace:
+        type: string
+  Job:
+    readOnly: true
+    type: object
+    allOf:
+      - $ref: '#/definitions/Worker'
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          status:
+            $ref: '#/definitions/Status'
+          progress:
+            $ref: '#/definitions/JobProgress'
+          serviceClientId:
+            description: >
+              service.clientId used as a search key for recent/archived jobs,
+              this value is created internally using the Service plus the
+              authorized client ID
+            type: string
+            example: fpccomp-c-uw2.KAMAJwfMQEfgdiQ...
+          creationTime:
+            description: >
+              Indicates the time when the job record was created in ISO8601
+              format
+            type: string
+            example: '2020-02-20T23:20:07.206Z'
+          modificationTime:
+            description: >
+              Indicates the time of the job record's last modification,
+              expressed in milliseconds since midnight January 1, 1970.
+            type: string
+            example: '1548358601200'
+          tagsModificationTime:
+            description: >
+              Indicates the time of the job tags's last modification,
+              expressed in milliseconds since midnight January 1, 1970.
+            type: string
+            example: '1548358601200'
+          errors:
+            type: array
+            items:
+              $ref: '#/definitions/Failure'
+          tags:
+            type: array
+            items:
+              type: string
+            example:
+              - simulation
+              - bicycles
+          payload:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"inputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+          result:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"outputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile02.txt"}
+          statusUpdates:
+            type: array
+            items:
+              $ref: '#/definitions/StatusUpdate'
+          type:
+            type: string
+            default: 'Job'
+  JobArgs:
+    type: object
+    allOf:
+      - $ref: '#/definitions/Worker'
+      - properties:
+          tags:
+            type: array
+            items:
+              type: string
+            example:
+              - simulation
+              - bicycles
+          payload:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"inputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+          idempotencyId:
+            type: string
+            description: >-
+              Calls with the same idempoyencyId are idempotent; if job with the
+              same idempotencyId exists, the second job will be rejected.
+            example: b67d50dc-ce3c-4dad-acb2-1d34ca536ac3
+            minLength: 8
+            maxLength: 128
+          userType:
+            type: string
+            description: >-
+              One of the user types defined in jobConcurrencyLimits part of
+              ComputeSpecification
+            example: Student
+  SearchResult:
+    required:
+      - jobs
+      - nextToken
+      - lastUpdateTime
+    description: |
+      Data returned from a search
+    type: object
+    properties:
+      jobs:
+        type: array
+        items:
+          $ref: '#/definitions/Job'
+      lastUpdateTime:
+        type: string
+        description: >
+          Time from the last database update. Use it as the "fromTime" in the
+          next search. Expressed in milliseconds since midnight January 1, 1970.
+        example: 1562599327
+      nextToken:
+        description: >
+          Internal token used for search pagination, returned in search results
+          for queries which span multiple pages
+        type: string
+        format: base64
+        pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+        example: >-
+          Y2VlNjkwYzItNThiYy00YzE0LThiMzktMGFhNGNjNDQ0NTQ3OmZwY2NvbXAtYy11dzItc2IuS0FNQUpualhKV3ZqaXNaY250ZG1vRGYzeEdKT2VEcVU6MTU0ODQ1MTY3NzcwMg
+  StatusUpdate:
+    required:
+      - status
+      - timestamp
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      timestamp:
+        type: string
+        description: >-
+          The ISO8601 timestamp representing the time when the status was
+          updated
+parameters:
+  JobID:
+    name: jobID
+    in: query
+    required: true
+    type: string
+    pattern: >-
+      [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+  JobSecret:
+    name: jobSecret
+    in: query
+    required: true
+    type: string

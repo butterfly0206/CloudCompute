@@ -1,0 +1,233 @@
+# MAINTENANCE WARNING
+# DO NOT MODIFY job-manager.yaml and worker-manager.yaml directly. Modify model-definitions.yaml
+# and/or worker-manager-no-definitions.yaml and job-manager-no-definitions.yaml instead,
+# then run the gen_wm_server.sh or .bat and gen_jm_server.sh or .bat scripts to produce
+# job-manager.yaml and worker-manager.yaml; then check those in.
+# MAINTENANCE WARNING
+swagger: '2.0'
+info:
+  version: 1.0.18
+  title: CloudOS Compute Worker API
+  description: >-
+    Rest API for workers to pull jobs and report progress, liveness and
+    completion. All APIs use a prefix of /api/v1.
+  termsOfService: 'http://www.autodesk.com'
+  contact:
+    name: Forge platform and Components - Compute team
+    email: cloudos-compute@autodesk.com
+    url: 'http://www.autodesk.com'
+  license:
+    name: Autodesk
+    url: 'http://www.autodesk.com'
+basePath: /api/v1
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  WorkerSecurity:
+    type: basic
+paths:
+  /healthcheck:
+    get:
+      operationId: healthcheckGet
+      summary: Health Check
+      description: >-
+        Returns the health of the Service with details. If health is OK, returns
+        200.
+      parameters:
+        - in: header
+          name: x-vault-token
+          required: false
+          type: string
+        - in: header
+          name: x-user
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The JSON to return for a successful healthcheck
+          schema:
+            $ref: '#/definitions/HealthCheckResponse'
+  /poll:
+    post:
+      description: Returns a job specific to the service type
+      operationId: pollForJob
+      parameters:
+        - name: pollData
+          in: body
+          description: name of service to pull the jobs for
+          required: true
+          schema:
+            $ref: '#/definitions/PollForJob'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Job to work on
+          schema:
+            $ref: '#/definitions/PollResponse'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '404':
+          description: No Job is found
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /complete:
+    post:
+      operationId: postComplete
+      description: conclude job
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Conclusion'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: response
+        '400':
+          description: Job id is invalid or trying to modify a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '408':
+          description: Job timed out before reaching completion.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /token:
+    get:
+      operationId: getToken
+      description: Get auth token and optionally refresh existing token and get it.
+      parameters:
+        - $ref: '#/parameters/JobID'
+        - $ref: '#/parameters/JobSecret'
+        - name: refresh
+          in: query
+          type: boolean
+          required: false
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Worker token
+          schema:
+            $ref: '#/definitions/TokenResponse'
+        '400':
+          description: Job Id is invalid or trying to get a token for a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '404':
+          description: No token found
+          schema:
+            $ref: '#/definitions/NoTokenResponse'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /progress:
+    post:
+      operationId: postProgress
+      description: Report progress in percent complete and intermediate details
+      parameters:
+        - name: progress data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Progress'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Progress reporting response
+        '400':
+          description: Job Id is invalid or trying to modify a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '408':
+          description: Job attempt has timed out.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /heartbeat:
+    post:
+      operationId: postHeartbeat
+      description: 'Report that a worker is alive, and working on a specific job'
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Heartbeat'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Response with cancellation notification
+          schema:
+            $ref: '#/definitions/HeartbeatResponse'
+        '400':
+          description: Job Id is invalid or trying to modify a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/jobs/{id}':
+    get:
+      description: Returns a single job for given job ID
+      operationId: getJob
+      tags:
+        - developers
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to fetch
+          required: true
+          type: string
+          format: base64
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: job details response
+          schema:
+            $ref: '#/definitions/Job'
+        '403':
+          description: Job does not belong to this worker
+        '404':
+          description: job not found
+        '409':
+          description: Job is in a terminal state
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+responses:
+  UnauthorizedError:
+    description: Authentication information is missing or invalid
+    headers:
+      WWW_Authenticate:
+        type: string

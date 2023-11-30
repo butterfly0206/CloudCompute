@@ -1,0 +1,15 @@
+[requires]
+python_version = '3.9'
+
+[packages]
+requests = "*"
+tenacity = "*"
+pyyaml = ">=5.4"
+bravado = "*"
+junit-xml = "*"
+boto3 = "*"
+asgiref = "*"
+requests_oauthlib = "*"
+
+[dev-packages]
+pylint = "*"

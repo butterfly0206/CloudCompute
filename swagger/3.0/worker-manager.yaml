@@ -1,0 +1,813 @@
+# MAINTENANCE WARNING
+# DO NOT MODIFY job-manager.yaml and worker-manager.yaml directly. Modify model-definitions.yaml
+# and/or worker-manager-no-definitions.yaml and job-manager-no-definitions.yaml instead,
+# then run the gen_wm_server.sh or .bat and gen_jm_server.sh or .bat scripts to produce
+# job-manager.yaml and worker-manager.yaml; then check those in.
+# MAINTENANCE WARNING
+openapi: 3.0.1
+info:
+  title: CloudOS Compute Worker API
+  description: >-
+    Rest API for workers to pull jobs and report progress, liveness and
+    completion. All APIs use a prefix of /api/v1.
+  termsOfService: 'http://www.autodesk.com'
+  contact:
+    name: Forge platform and Components - Compute team
+    url: 'http://www.autodesk.com'
+    email: cloudos-compute@autodesk.com
+  license:
+    name: Autodesk
+    url: 'http://www.autodesk.com'
+  version: 1.0.18
+servers:
+  - url: https://worker-manager.fpccomp-c-uw2.cosv2-c-uw2.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-s-ue1-ds.cosv2-s-ue1-ds.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-s-ue1-dn.cosv2-s-ue1-dn.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-s-ew1-es.cosv2-s-ew1-es.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-p-ue1-ds.cosv2-p-ue1-ds.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-p-ue1-dn.cosv2-p-ue1-dn.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-p-ew1-es.cosv2-p-ew1-es.autodesk.com/api/v1
+  - url: https://worker-manager.fpccomp-p-as2.cosv2-p-as2.autodesk.com/api/v1
+paths:
+  /healthcheck:
+    get:
+      summary: Health Check
+      description: >-
+        Returns the health of the Service with details. If health is OK, returns
+        200.
+      operationId: healthcheckGet
+      parameters:
+        - name: x-vault-token
+          in: header
+          schema:
+            type: string
+        - name: x-user
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The JSON to return for a successful healthcheck
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /poll:
+    post:
+      description: Returns a job specific to the service type
+      operationId: pollForJob
+      requestBody:
+        description: name of service to pull the jobs for
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Worker'
+        required: true
+      responses:
+        '200':
+          description: Job to work on
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollResponse'
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        '404':
+          description: No Job is found
+          content: {}
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+      x-codegen-request-body-name: pollData
+  /complete:
+    post:
+      description: conclude job
+      operationId: postComplete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Conclusion'
+        required: true
+      responses:
+        '200':
+          description: response
+          content: {}
+        '400':
+          description: Job id is invalid or trying to modify a completed job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        '408':
+          description: Job timed out before reaching completion.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+      x-codegen-request-body-name: data
+  /token:
+    post:
+      description: Acquire an auth token and (optionally) refresh it.
+      operationId: acquireToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcquireTokenArguments'
+        required: true
+      responses:
+        '200':
+          description: Worker token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: JobId or JobSecret are invalid, or trying to get a token for a completed job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        '404':
+          description: No token found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoTokenResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+    get:
+      description: Get auth token and optionally refresh existing token and get it.
+      operationId: getToken
+      parameters:
+        - name: jobID
+          in: query
+          required: true
+          schema:
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+            type: string
+        - name: jobSecret
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: refresh
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Worker token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Job Id is invalid or trying to get a token for a completed job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        '404':
+          description: No token found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoTokenResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+  /progress:
+    post:
+      description: Report progress in percent complete and intermediate details
+      operationId: postProgress
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Progress'
+        required: true
+      responses:
+        '200':
+          description: Progress reporting response
+          content: {}
+        '400':
+          description: Job Id is invalid or trying to modify a completed job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        '408':
+          description: Job attempt has timed out.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+      x-codegen-request-body-name: progress data
+  /heartbeat:
+    post:
+      description: 'Report that a worker is alive, and working on a specific job'
+      operationId: postHeartbeat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Heartbeat'
+        required: true
+      responses:
+        '200':
+          description: Response with cancellation notification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HeartbeatResponse'
+        '400':
+          description: Job Id is invalid or trying to modify a completed job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication information is missing or invalid
+          headers:
+            WWW_Authenticate:
+              schema:
+                type: string
+          content: {}
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+      x-codegen-request-body-name: data
+  '/jobs/{id}':
+    get:
+      tags:
+        - developers
+      description: Returns a single job for given job ID
+      operationId: getJob
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to fetch
+          required: true
+          schema:
+            type: string
+            format: base64
+      responses:
+        '200':
+          description: job details response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '403':
+          description: Job does not belong to this worker
+          content: {}
+        '404':
+          description: job not found
+          content: {}
+        '409':
+          description: Job is in a terminal state
+          content: {}
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - BasicAuth: []
+components:
+  schemas:
+    Worker:
+      required:
+        - service
+        - worker
+      type: object
+      properties:
+        service:
+          type: string
+          description: An appdef moniker
+          example: amktool-c-uw2
+        worker:
+          type: string
+          description: The particular worker within a service
+          example: path-gen
+        portfolioVersion:
+          type: string
+          description: The portfolio version of the worker
+          example: 1.0.46
+    PollResponse:
+      type: object
+      properties:
+        jobID:
+          pattern: >-
+
+            [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+          type: string
+        jobSecret:
+          type: string
+        payload:
+          type: object
+          properties: {}
+          description: >-
+            Arbitrary Json data, conforming to a schema associated with the
+            application definition
+          example: >-
+            {"inputFilePath":
+            "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+        tags:
+          type: array
+          example:
+            - simulation
+            - bicycles
+          items:
+            type: string
+    Conclusion:
+      allOf:
+        - $ref: '#/components/schemas/Result'
+        - type: object
+          properties:
+            jobID:
+              pattern: >-
+                [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+              type: string
+            jobSecret:
+              type: string
+            status:
+              $ref: '#/components/schemas/Status'
+    Heartbeat:
+      required:
+        - jobID
+        - jobSecret
+      type: object
+      properties:
+        jobID:
+          pattern: >-
+            [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+          type: string
+        jobSecret:
+          type: string
+    HeartbeatResponse:
+      type: object
+      properties:
+        canceled:
+          type: boolean
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    NoTokenResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    JobProgress:
+      type: object
+      properties:
+        percent:
+          type: integer
+          example: 74
+        details:
+          type: object
+          properties: {}
+          description: >-
+            Arbitrary Json data, conforming to a schema associated with the
+            application definition
+          example: >-
+            {"preview":
+            "https://developer-dev.api.autodesk.com/oss/v2/buckets/1/preview.jpg"}
+    Progress:
+      allOf:
+        - type: object
+          properties:
+            jobID:
+              pattern: >-
+                [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+              type: string
+            jobSecret:
+              type: string
+        - $ref: '#/components/schemas/JobProgress'
+    Status:
+      type: string
+      enum:
+        - CREATED
+        - QUEUED
+        - SCHEDULED
+        - INPROGRESS
+        - COMPLETED
+        - CANCELED
+        - FAILED
+        - UNKNOWN
+    Result:
+      allOf:
+        - $ref: '#/components/schemas/Success'
+        - $ref: '#/components/schemas/Failure'
+    Failure:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error enum or a short description of the error
+          example: INVALID_MODEL
+        details:
+          type: object
+          properties: {}
+          description: >
+            Any specific details around the error thrown. These will be provided
+            to the client
+          example:
+            boundingBox:
+              min:
+                x: 10
+                'y': 20
+              max:
+                x: 40
+                'y': 60
+        timestamp:
+          type: string
+          description: The ISO8601 timestamp when the error occured.
+    Success:
+      type: object
+      properties:
+        result:
+          type: object
+          properties: {}
+          example:
+            outputFilePath: >-
+              https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile02.txt
+    HealthCheckResponse:
+      required:
+        - overall
+        - scanTime
+      type: object
+      properties:
+        portfolioVersion:
+          type: string
+          description: The portfolio version of the worker
+          example: 1.0.46
+        overall:
+          type: string
+          description: >-
+            The overall health of the compute service (worker manager or job
+            manager)
+          enum:
+            - HEALTHY
+            - UNHEALTHY
+            - DEGRADED
+        scanTime:
+          type: string
+          description: The ISO8601 timestamp representing the start of the healthcheck
+        revision:
+          type: string
+          description: Current build version\
+    Error:
+      required:
+        - code
+        - description
+        - message
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          properties: {}
+        requestContext:
+          type: object
+          properties: {}
+        stackTrace:
+          type: string
+    JobInfo:
+      type: object
+      properties:
+        jobID:
+          pattern: >-
+            [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+        progress:
+          $ref: '#/components/schemas/JobProgress'
+        serviceClientId:
+          type: string
+          description: >
+            service.clientId used as a search key for recent/archived jobs, this
+            value is created internally using the Service plus the authorized
+            client ID
+          example: fpccomp-c-uw2.KAMAJwfMQEfgdiQ...
+        creationTime:
+          type: string
+          description: |
+            Indicates the time when the job record was created in ISO8601 format
+          example: 2020-02-20T23:20:07.206Z
+        modificationTime:
+          type: string
+          description: >
+            Indicates the time of the job record's last modification, expressed
+            in milliseconds since midnight January 1, 1970.
+          example: '1548358601200'
+        tagsModificationTime:
+          type: string
+          description: >
+            Indicates the time of the job tags's last modification, expressed
+            in milliseconds since midnight January 1, 1970.
+          example: '1548358601200'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Failure'
+        tags:
+          type: array
+          example:
+            - simulation
+            - bicycles
+          items:
+            type: string
+        payload:
+          type: object
+          properties: {}
+          description: >-
+            Arbitrary Json data, conforming to a schema associated with the
+            application definition
+          example: >-
+            {"inputFilePath":
+            "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+        result:
+          type: object
+          properties: {}
+          description: >-
+            Arbitrary Json data, conforming to a schema associated with the
+            application definition
+          example: >-
+            {"outputFilePath":
+            "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile02.txt"}
+        statusUpdates:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusUpdate'
+    Job:
+      allOf:
+        - $ref: '#/components/schemas/Worker'
+        - $ref: '#/components/schemas/JobInfo'
+        - type: object
+          properties:
+            type:
+              type: string
+              default: 'Job'
+    JobArgs:
+      allOf:
+        - $ref: '#/components/schemas/Worker'
+        - type: object
+          properties:
+            tags:
+              type: array
+              example:
+                - simulation
+                - bicycles
+              items:
+                type: string
+            payload:
+              type: object
+              properties: {}
+              description: >-
+                Arbitrary Json data, conforming to a schema associated with the
+                application definition
+              example: >-
+                {"inputFilePath":
+                "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+            idempotencyId:
+              maxLength: 128
+              minLength: 8
+              type: string
+              description: >-
+                Calls with the same idempoyencyId are idempotent; if job with
+                the same idempotencyId exists, the second job will be rejected.
+              example: b67d50dc-ce3c-4dad-acb2-1d34ca536ac3
+            userType:
+              type: string
+              description: >-
+                One of the user types defined in jobConcurrencyLimits part of
+                ComputeSpecification
+              example: Student
+    SearchResult:
+      required:
+        - jobs
+        - lastUpdateTime
+        - nextToken
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        lastUpdateTime:
+          type: string
+          description: >
+            Time from the last database update. Use it as the "fromTime" in the
+            next search. Expressed in milliseconds since midnight January 1,
+            1970.
+          example: '1562599327'
+        nextToken:
+          pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+          type: string
+          description: >
+            Internal token used for search pagination, returned in search
+            results for queries which span multiple pages
+          format: base64
+          example: >-
+            Y2VlNjkwYzItNThiYy00YzE0LThiMzktMGFhNGNjNDQ0NTQ3OmZwY2NvbXAtYy11dzItc2IuS0FNQUpualhKV3ZqaXNaY250ZG1vRGYzeEdKT2VEcVU6MTU0ODQ1MTY3NzcwMg
+      description: |
+        Data returned from a search
+    StatusUpdate:
+      required:
+        - status
+        - timestamp
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        timestamp:
+          type: string
+          description: >-
+            The ISO8601 timestamp representing the time when the status was
+            updated
+    ArrayJobItem:
+      required:
+        - payload
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+            - simulation
+            - bicycles
+        payload:
+          description: >-
+            Arbitrary Json data, conforming to a schema associated with the
+            application definition
+          type: object
+          example: >-
+            {"inputFilePath":
+            "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+    ArrayJobArgs:
+      allOf:
+        - $ref: '#/components/schemas/Worker'
+        - type: object
+          properties:
+            jobs:
+              type: array
+              minItems: 2
+              maxItems: 10000
+              items:
+                $ref: '#/components/schemas/ArrayJobItem'
+    ArrayJob:
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/Worker'
+        - type: object
+          properties:
+            jobID:
+              type: string
+              description: Parent job ID assigned to all the jobs in the array
+              pattern: >-
+                [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+            jobs:
+              type: array
+              description: Array all the jobs crated
+              items:
+                $ref: '#/components/schemas/JobInfo'
+    ArrayJobResult:
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/ArrayJob'
+        - type: object
+          properties:
+            nextToken:
+              pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+              type: string
+              description: >
+                The list of child jobs in array may be paginated and the nextToken is used to request the next page.
+                The nextToken will be empty or null if there are no more pages.
+              format: base64
+              example: >-
+                Y2VlNjkwYzItNThiYy00YzE0LThiMzktMGFhNGNjNDQ0NTQ3OmZwY2NvbXAtYy11dzItc2IuS0FNQUpualhKV3ZqaXNaY250ZG1vRGYzeEdKT2VEcVU6MTU0ODQ1MTY3NzcwMg
+            type:
+              type: string
+              default: 'ArrayJobResult'
+    AcquireTokenArguments:
+      required:
+        - jobId
+        - jobSecret
+      type: object
+      properties:
+        jobId:
+          pattern: >-
+            [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+          type: string
+        jobSecret:
+          type: string
+        refresh:
+          description: If true, the token will be refreshed to be usable for another hour
+          type: boolean
+          default: false
+  parameters:
+    JobID:
+      name: jobID
+      in: query
+      required: true
+      schema:
+        pattern: >-
+          [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(:array(:(0|([1-9]\d{0,3})))?)?
+        type: string
+    JobSecret:
+      name: jobSecret
+      in: query
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    BasicAuth:
+      type: http
+      scheme: basic

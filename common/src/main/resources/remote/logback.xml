@@ -1,0 +1,19 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+    <root level="WARN">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    <logger name="com.autodesk.compute" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    <logger name="com.autodesk.compute.common.RequestTraceFilter" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <!--
+    <logger name="org.jboss.weld.Bootstrap" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+    -->
+</configuration>

@@ -1,0 +1,48 @@
+completionLambda:
+  lambda_function_name: fpccomp-s-ue1_completionLambda
+  adsk_moniker: fpccomp-s-ue1
+  adsk_environment: stg
+  aws_region: us-east-1
+  aws_account: 907643900295
+  custom_role_arn: arn:aws:iam::907643900295:role/cos_ctr_fpccomp-s-ue1
+  env_vars:
+    DYNAMODB_TABLE_NAME: cosv2_s_ue1_fpc_job_progress_data
+    IDEMPOTENT_JOBS_TABLE_NAME: cosv2_s_ue1_fpc_idempotent_jobs
+
+testJobsLambda:
+  lambda_function_name: fpccomp-s-ue1_testJobsLambda
+  adsk_moniker: fpccomp-s-ue1
+  adsk_environment: stg
+  aws_region: us-east-1
+  aws_account: 907643900295
+  custom_role_arn: arn:aws:iam::907643900295:role/cos_ctr_fpccomp-s-ue1
+  env_vars:
+    APP_MONIKER: fpccomp-s-ue1
+    #    APP_BATCHWORKER: sisample
+    APP_ECSWORKER: ecsworker
+    APP_ECS_JOBS_COUNT: 1
+    APIGEE_HOST: developer-stg.api.autodesk.com
+    APP_BATCH_JOB_TIMEOUT_SECONDS: 720
+    APP_ECS_JOB_TIMEOUT_SECONDS: 300
+    COS_PORTFOLIO_VERSION: deployed
+    COS_SECRETS_MANAGER_PATH: /fpccomp/testjobslambda
+    AWS_ACCOUNT_ID: 907643900295
+    REGION: us-east-1
+  secrets:
+    path: cosv3/fpccomp-s-ue1/generic/testjobslambda
+    version: 1
+    keys:
+      - OXYGEN_CLIENT_ID
+      - OXYGEN_CLIENT_SECRET
+      - OXYGEN_URL
+      - SLACK_CRITICAL_WEBHOOK_URL
+
+cleanupLambda:
+  lambda_function_name: fpccomp-s-ue1_cleanupLambda
+  adsk_moniker: fpccomp-s-ue1
+  adsk_environment: stg
+  aws_region: us-east-1
+  aws_account: 907643900295
+  custom_role_arn: arn:aws:iam::907643900295:role/cos_ctr_fpccomp-s-ue1
+  env_vars:
+    MAX_AGE_DAYS: 14

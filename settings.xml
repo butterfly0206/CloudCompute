@@ -1,0 +1,10 @@
+<settings>
+  <mirrors>
+    <mirror>
+      <id>bobcat</id>
+      <name>Bobcat Maven Mirror</name>
+      <url>https://art-bobcat.autodesk.com/artifactory/maven-libs-release-virtual</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>

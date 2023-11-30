@@ -1,0 +1,604 @@
+# MAINTENANCE WARNING
+# DO NOT MODIFY job-manager.yaml and worker-manager.yaml directly. Modify model-definitions.yaml
+# and/or worker-manager-no-definitions.yaml and job-manager-no-definitions.yaml instead,
+# then run the gen_wm_server.sh or .bat and gen_jm_server.sh or .bat scripts to produce
+# job-manager.yaml and worker-manager.yaml; then check those in.
+# MAINTENANCE WARNING
+swagger: '2.0'
+info:
+  version: 1.0.18
+  title: CloudOS Compute Worker API
+  description: >-
+    Rest API for workers to pull jobs and report progress, liveness and
+    completion. All APIs use a prefix of /api/v1.
+  termsOfService: 'http://www.autodesk.com'
+  contact:
+    name: Forge platform and Components - Compute team
+    email: cloudos-compute@autodesk.com
+    url: 'http://www.autodesk.com'
+  license:
+    name: Autodesk
+    url: 'http://www.autodesk.com'
+basePath: /api/v1
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  WorkerSecurity:
+    type: basic
+paths:
+  /healthcheck:
+    get:
+      operationId: healthcheckGet
+      summary: Health Check
+      description: >-
+        Returns the health of the Service with details. If health is OK, returns
+        200.
+      parameters:
+        - in: header
+          name: x-vault-token
+          required: false
+          type: string
+        - in: header
+          name: x-user
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The JSON to return for a successful healthcheck
+          schema:
+            $ref: '#/definitions/HealthCheckResponse'
+  /poll:
+    post:
+      description: Returns a job specific to the service type
+      operationId: pollForJob
+      parameters:
+        - name: pollData
+          in: body
+          description: name of service to pull the jobs for
+          required: true
+          schema:
+            $ref: '#/definitions/PollForJob'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Job to work on
+          schema:
+            $ref: '#/definitions/PollResponse'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '404':
+          description: No Job is found
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /complete:
+    post:
+      operationId: postComplete
+      description: conclude job
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Conclusion'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: response
+        '400':
+          description: Job id is invalid or trying to modify a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '408':
+          description: Job timed out before reaching completion.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /token:
+    get:
+      operationId: getToken
+      description: Get auth token and optionally refresh existing token and get it.
+      parameters:
+        - $ref: '#/parameters/JobID'
+        - $ref: '#/parameters/JobSecret'
+        - name: refresh
+          in: query
+          type: boolean
+          required: false
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Worker token
+          schema:
+            $ref: '#/definitions/TokenResponse'
+        '400':
+          description: Job Id is invalid or trying to get a token for a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '404':
+          description: No token found
+          schema:
+            $ref: '#/definitions/NoTokenResponse'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /progress:
+    post:
+      operationId: postProgress
+      description: Report progress in percent complete and intermediate details
+      parameters:
+        - name: progress data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Progress'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Progress reporting response
+        '400':
+          description: Job Id is invalid or trying to modify a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        '408':
+          description: Job attempt has timed out.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /heartbeat:
+    post:
+      operationId: postHeartbeat
+      description: 'Report that a worker is alive, and working on a specific job'
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Heartbeat'
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: Response with cancellation notification
+          schema:
+            $ref: '#/definitions/HeartbeatResponse'
+        '400':
+          description: Job Id is invalid or trying to modify a completed job
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          $ref: '#/responses/UnauthorizedError'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/jobs/{id}':
+    get:
+      description: Returns a single job for given job ID
+      operationId: getJob
+      tags:
+        - developers
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to fetch
+          required: true
+          type: string
+          format: base64
+      security:
+        - WorkerSecurity: []
+      responses:
+        '200':
+          description: job details response
+          schema:
+            $ref: '#/definitions/Job'
+        '403':
+          description: Job does not belong to this worker
+        '404':
+          description: job not found
+        '409':
+          description: Job is in a terminal state
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+responses:
+  UnauthorizedError:
+    description: Authentication information is missing or invalid
+    headers:
+      WWW_Authenticate:
+        type: string
+definitions:
+  Worker:
+    type: object
+    required:
+      - service
+      - worker
+    properties:
+      service:
+        type: string
+        description: An appdef moniker
+        example: amktool-c-uw2
+      worker:
+        type: string
+        description: The particular worker within a service
+        example: path-gen
+      portfolioVersion:
+        type: string
+        description: The portfolio version of the worker
+        example: 1.0.46
+  PollResponse:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+      - payload
+    allOf:
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          jobSecret:
+            type: string
+            maxLength: 1024
+          payload:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"inputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+          tags:
+            type: array
+            items:
+              type: string
+            example:
+              - simulation
+              - bicycles
+  PollForJob:
+    type: object
+    allOf:
+      - $ref: '#/definitions/Worker'
+  Conclusion:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+      - status
+    allOf:
+      - $ref: '#/definitions/Result'
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          jobSecret:
+            type: string
+            maxLength: 1024
+          status:
+            $ref: '#/definitions/Status'
+  Heartbeat:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+    properties:
+      jobID:
+        type: string
+        pattern: >-
+          [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+      jobSecret:
+        type: string
+        maxLength: 1024
+  HeartbeatResponse:
+    type: object
+    properties:
+      canceled:
+        type: boolean
+  TokenResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  NoTokenResponse:
+    type: object
+    properties:
+      message:
+        type: string
+  JobProgress:
+    type: object
+    properties:
+      percent:
+        type: integer
+        example: 74
+      details:
+        description: >-
+          Arbitrary Json data, conforming to a schema associated with the
+          application definition
+        type: object
+        example: >-
+          {"preview":
+          "https://developer-dev.api.autodesk.com/oss/v2/buckets/1/preview.jpg"}
+  Progress:
+    type: object
+    required:
+      - jobID
+      - jobSecret
+    allOf:
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          jobSecret:
+            type: string
+            maxLength: 1024
+      - $ref: '#/definitions/JobProgress'
+  Status:
+    type: string
+    enum:
+      - CREATED
+      - QUEUED
+      - SCHEDULED
+      - INPROGRESS
+      - COMPLETED
+      - CANCELED
+      - FAILED
+      - UNKNOWN
+  Result:
+    allOf:
+      - $ref: '#/definitions/Success'
+      - $ref: '#/definitions/Failure'
+  Failure:
+    properties:
+      error:
+        type: string
+        description: Error enum or a short description of the error
+        example: INVALID_MODEL
+      details:
+        type: object
+        description: >
+          Any specific details around the error thrown. These will be provided
+          to the client
+        example:
+          boundingBox:
+            min:
+              x: 10
+              'y': 20
+            max:
+              x: 40
+              'y': 60
+      timestamp:
+        type: string
+        description: The ISO8601 timestamp when the error occured.
+  Success:
+    properties:
+      result:
+        type: object
+        example:
+          outputFilePath: >-
+            https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile02.txt
+  HealthCheckResponse:
+    type: object
+    required:
+      - scanTime
+      - overall
+    properties:
+      portfolioVersion:
+        type: string
+        description: The portfolio version of the worker
+        example: 1.0.46
+      overall:
+        type: string
+        enum:
+          - HEALTHY
+          - UNHEALTHY
+          - DEGRADED
+        description: >-
+          The overall health of the compute service (worker manager or job
+          manager)
+      scanTime:
+        type: string
+        description: The ISO8601 timestamp representing the start of the healthcheck
+      revision:
+        type: string
+        description: Current build version\
+  Error:
+    required:
+      - code
+      - description
+      - message
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      message:
+        type: string
+      details:
+        type: object
+      requestContext:
+        type: object
+      stackTrace:
+        type: string
+  Job:
+    readOnly: true
+    type: object
+    allOf:
+      - $ref: '#/definitions/Worker'
+      - properties:
+          jobID:
+            type: string
+            pattern: >-
+              [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+          status:
+            $ref: '#/definitions/Status'
+          progress:
+            $ref: '#/definitions/JobProgress'
+          serviceClientId:
+            description: >
+              service.clientId used as a search key for recent/archived jobs,
+              this value is created internally using the Service plus the
+              authorized client ID
+            type: string
+            example: fpccomp-c-uw2.KAMAJwfMQEfgdiQ...
+          creationTime:
+            description: >
+              Indicates the time when the job record was created in ISO8601
+              format
+            type: string
+            example: '2020-02-20T23:20:07.206Z'
+          modificationTime:
+            description: >
+              Indicates the time of the job record's last modification,
+              expressed in milliseconds since midnight January 1, 1970.
+            type: string
+            example: '1548358601200'
+          errors:
+            type: array
+            items:
+              $ref: '#/definitions/Failure'
+          tags:
+            type: array
+            items:
+              type: string
+            example:
+              - simulation
+              - bicycles
+          payload:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"inputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+          result:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"outputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile02.txt"}
+          statusUpdates:
+            type: array
+            items:
+              $ref: '#/definitions/StatusUpdate'
+          type:
+            type: string
+            default: 'Job'
+  JobArgs:
+    type: object
+    allOf:
+      - $ref: '#/definitions/Worker'
+      - properties:
+          tags:
+            type: array
+            items:
+              type: string
+            example:
+              - simulation
+              - bicycles
+          payload:
+            description: >-
+              Arbitrary Json data, conforming to a schema associated with the
+              application definition
+            type: object
+            example: >-
+              {"inputFilePath":
+              "https://developer-dev.api.autodesk.com/oss/v2/buckets/longstestbucket1234/objects/mytestfile01.txt"}
+          idempotencyId:
+            type: string
+            description: >-
+              Calls with the same idempoyencyId are idempotent; if job with the
+              same idempotencyId exists, the second job will be rejected.
+            example: b67d50dc-ce3c-4dad-acb2-1d34ca536ac3
+            minLength: 8
+            maxLength: 128
+          userType:
+            type: string
+            description: >-
+              One of the user types defined in jobConcurrencyLimits part of
+              ComputeSpecification
+            example: Student
+  SearchResult:
+    required:
+      - jobs
+      - nextToken
+      - lastUpdateTime
+    description: |
+      Data returned from a search
+    type: object
+    properties:
+      jobs:
+        type: array
+        items:
+          $ref: '#/definitions/Job'
+      lastUpdateTime:
+        type: string
+        description: >
+          Time from the last database update. Use it as the "fromTime" in the
+          next search. Expressed in milliseconds since midnight January 1, 1970.
+        example: 1562599327
+      nextToken:
+        description: >
+          Internal token used for search pagination, returned in search results
+          for queries which span multiple pages
+        type: string
+        format: base64
+        pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+        example: >-
+          Y2VlNjkwYzItNThiYy00YzE0LThiMzktMGFhNGNjNDQ0NTQ3OmZwY2NvbXAtYy11dzItc2IuS0FNQUpualhKV3ZqaXNaY250ZG1vRGYzeEdKT2VEcVU6MTU0ODQ1MTY3NzcwMg
+  StatusUpdate:
+    required:
+      - status
+      - timestamp
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/Status'
+      timestamp:
+        type: string
+        description: >-
+          The ISO8601 timestamp representing the time when the status was
+          updated
+parameters:
+  JobID:
+    name: jobID
+    in: query
+    required: true
+    type: string
+    pattern: >-
+      [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+  JobSecret:
+    name: jobSecret
+    in: query
+    required: true
+    type: string
+    maxLength: 1024

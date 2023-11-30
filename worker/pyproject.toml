@@ -1,0 +1,32 @@
+[tool]
+[tool.poetry]
+name = "fpccomp-worker"
+version = "0.1.0"
+description = "CloudOS Compute Worker"
+authors = ["CloudOS Compute Team <cloudos-engg@autodesk.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+asgiref = "*"
+boto3 = "*"
+certifi = "2023.7.22"
+compute = "*"
+crochet = "*"
+fido = { extras = ["tls"], version = "^4.2.2" }
+iso8601 = "*"
+jsonschema = "<4.0"
+more-itertools = "*"
+pytz = "*"
+pyyaml = "*"
+requests = "*"
+tenacity = "*"
+bravado = { extras = ["fido"], version = "^11.0.2" }
+
+[tool.poetry.dev-dependencies]
+pyinstaller = "*"
+pylint = "*"
+
+[[tool.poetry.source]]
+name = "bobcat"
+url = "https://art-bobcat.autodesk.com/artifactory/api/pypi/autodesk-pypi/simple"
+

@@ -1,0 +1,10 @@
+{
+  "modelPackage": "com.autodesk.compute.common.model",
+  "apiPackage": "com.autodesk.compute.workermanager.api",
+  "invokerPackage": "com.autodesk.compute.workermanager.boot",
+  "groupId": "com.autodesk.compute",
+  "artifactId": "workermanager",
+  "serverPort": 8091,
+  "hideGenerationTimestamp": true,
+  "generateJbossDeploymentDescriptor": true
+}

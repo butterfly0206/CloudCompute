@@ -1,0 +1,7 @@
+* text=auto
+job-manager/src/gen/* linguist-generated=true
+worker-manager/src/gen/* linguist-generated=true
+common/src/gen/* linguist-generated=true
+test-lambda/jmclient/* linguist-generated=true
+
+

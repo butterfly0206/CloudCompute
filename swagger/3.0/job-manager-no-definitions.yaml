@@ -1,0 +1,378 @@
+# MAINTENANCE WARNING
+# DO NOT MODIFY job-manager.yaml and worker-manager.yaml directly. Modify model-definitions.yaml
+# and/or worker-manager-no-definitions.yaml and job-manager-no-definitions.yaml instead,
+# then run the gen_wm_server.sh or .bat and gen_jm_server.sh or .bat scripts to produce
+# job-manager.yaml and worker-manager.yaml; then check those in.
+# MAINTENANCE WARNING
+openapi: 3.0.1
+info:
+  title: CloudOS Compute API
+  description: >
+    CloudOS Compute API for batch style workloads in Autodesk. Developers can
+    register compute worker types by following the cloudOS2.0 onboarding
+    process. Users can submit jobs against registered worker types. The system
+    treats input and output as opaque JSON payloads that must confirm to the
+    JSON schema specified by the worker documentation outside this system. All
+    APIs are used with the /api/v1 prefix.
+  termsOfService: >-
+    https://www.autodesk.com/company/legal-notices-trademarks/terms-of-service-autodesk360-web-services/forge-platform-web-services-api-terms-of-service
+  contact:
+    email: cloudos-compute@autodesk.com
+  license:
+    name: Autodesk
+    url: 'http://download.autodesk.com/us/FY14/Suites/LSA/en-US/lsa.html'
+  version: 1.0.19
+servers:
+  - url: https://job-manager.fpccomp-c-uw2.cosv2-c-uw2.autodesk.com/api/v1
+  - url: https://developer-dev.api.autodesk.com/fpccomp-c-uw2/jm/api/v1
+  - url: https://developer-stg.api.autodesk.com/fpccomp-s-ue1-ds/jm/api/v1
+  - url: https://developer-stg.api.autodesk.com/fpccomp-s-ue1-dn/jm/api/v1
+  - url: https://developer-stg.api.autodesk.com/fpccomp-s-ew1-es/jm/api/v1
+  - url: https://developer.api.autodesk.com/fpccomp-p-ue1-ds/jm/api/v1
+  - url: https://developer.api.autodesk.com/fpccomp-p-ue1-dn/jm/api/v1
+  - url: https://developer.api.autodesk.com/fpccomp-p-ew1-es/jm/api/v1
+  - url: https://developer.api.autodesk.com/fpccomp-p-as2/jm/api/v1
+tags:
+  - name: developers
+    description: Operations available to CloudOS Compute clients
+  - name: admins
+    description: Secured Admin-only calls
+paths:
+  /healthcheck:
+    get:
+      tags:
+        - admins
+      summary: Health Check
+      description: >-
+        Returns the health of the Service with details. If health is OK, returns
+        200.
+      operationId: healthcheckGet
+      parameters:
+        - name: x-vault-token
+          in: header
+          schema:
+            type: string
+        - name: x-user
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /jobs:
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - developers
+      summary: Creates a job in the system
+      description: >
+        Creates a job for a particular compute worker type. Jobs can be seen as nearly immutable
+        from the client point of view. Once the job is created, only its tags can be modified.
+        A job will go through its own state machine and succeed or fail for various
+        reasons including a worker-specific (defaults to 1 hour) or a worker
+        no-longer heartbeating its progress (by default, required every 2
+        minutes). All jobs will be deleted from the system after 30 days of
+        lifetime. Input payload for the job must comply with the JSON
+        specification provided by the job worker developer.
+      operationId: createJob
+      parameters:
+        - name: noBatch
+          in: query
+          description: >-
+            True to tell the Job Manager not to schedule a batch worker (e.g. so
+            a test worker can pick it up via polling)
+          schema:
+            type: boolean
+      requestBody:
+        description: Job creation arguments
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobArgs'
+        required: true
+      responses:
+        '200':
+          description: job created and either scheduled or queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '202':
+          description: job created but with schedule pending
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: jobArgs
+  /jobs/array:
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - developers
+      summary: Creates array of jobs in the system
+      operationId: createJobs
+      description: >
+        Creates array of jobs a particular compute worker type. Jobs can be seen as nearly immutable
+        from the client point of view. Once the job is created, only its tags can be modified.
+        A job will go through its own state machine and succeed or
+        fail for various reasons including a worker-specific (defaults to 1
+        hour) or a worker no-longer heartbeating its progress (by default,
+        required every 2 minutes). All jobs will be deleted from the system
+        after 30 days of lifetime. Input payload for the job must comply with
+        the JSON specification provided by the job worker developer.
+      requestBody:
+        description: Array Job creation arguments
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArrayJobArgs'
+        required: true
+      responses:
+        '200':
+          description: job created and either scheduled or queued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayJob'
+        '202':
+          description: job created but with schedule pending
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayJob'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: jobArgs
+  '/jobs/{id}':
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - developers
+      description: Returns a single job for given job ID
+      operationId: getJob
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to fetch
+          required: true
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: >
+            The list of jobs in array may be paginated and the nextToken is used to request the next page.
+            The nextToken will be empty or null if there are no more pages.
+          required: false
+          schema:
+            type: string
+            format: base64
+          example: >-
+            Y2VlNjkwYzItNThiYy00YzE0LThiMzktMGFhNGNjNDQ0NTQ3OmZwY2NvbXAtYy11dzItc2IuS0FNQUpualhKV3ZqaXNaY250ZG1vRGYzeEdKT2VEcVU6MTU0ODQ1MTY3NzcwMg
+      responses:
+        '200':
+          description: job details response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Job'
+                  - $ref: '#/components/schemas/ArrayJob'
+        '404':
+          description: job not found
+          content: {}
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - developers
+      description: >
+        Deletes a single job for given job ID. A job can be deleted at any stage
+        of its lifecycle. Since jobs are immutable, delete is synonymous to
+        cancel and no separate cancel api is needed.
+      operationId: deleteJob
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: job deleted
+          content: {}
+        '202':
+          description: Request is accepted in case of an array job and deletion is done asynchronously
+          content: {}
+        '400':
+          description: job id is invalid or trying to delete completed job
+          content: {}
+        '409':
+          description: job is already in a terminal state
+          content: {}
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/jobs/{jobId}/tags/{tagName}':
+    put:
+      security:
+        - BearerAuth: []
+      description: Add a new tag for given job ID.
+      operationId: addTag
+      tags:
+        - developers
+      parameters:
+        - name: jobId
+          in: path
+          description: ID of job to add tag
+          required: true
+          schema:
+            type: string
+        - name: tagName
+          in: path
+          description: tag name to be added
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: tag added
+          content: {}
+        '304':
+          description: The tag does exist already
+          content: {}
+        '404':
+          description: job not found
+          content: {}
+    delete:
+      security:
+        - BearerAuth: []
+      description: Delete a tag for given job ID.
+      operationId: deleteTag
+      tags:
+        - developers
+      parameters:
+        - name: jobId
+          in: path
+          description: ID of job to delete tag
+          required: true
+          schema:
+            type: string
+        - name: tagName
+          in: path
+          description: tag name to be removed
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: tag removed
+          content: {}
+        '304':
+          description: The tag does not exist
+          content: {}
+        '404':
+          description: The job was not found
+          content: {}
+  /search/recent:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - developers
+      summary: 'Search recently (up to 30 days) modified jobs, regardless of status.'
+      description: >
+        Returns any recent job regardless of status within the time scope. The
+        item order in the pages returned is arbitrary. A single query operation
+        can retrieve a variable number of items, limited by the lesser of a
+        maximum of 1 MB of data or maxResults (# of items per page).
+      operationId: searchRecentJobs
+      parameters:
+        - name: service
+          in: query
+          description: Your appdef moniker
+          required: true
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          description: >
+            Maximum number of results to return for each query page (may be
+            limited still by aggregate data size <= 1 MB)
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 100
+        - name: fromTime
+          in: query
+          description: >
+            Start searching from this time onwards, expressed in milliseconds
+            since midnight January 1, 1970.
+          schema:
+            type: string
+        - name: toTime
+          in: query
+          description: >
+            Start searching up to and including this time, expressed in
+            milliseconds since midnight January 1, 1970.
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: Filter your search results by this tag.
+          schema:
+            type: string
+        - name: nextToken
+          in: header
+          description: >
+            Internal token used for search pagination, returned in search
+            results for queries which span multiple pages
+          schema:
+            type: string
+            format: base64
+      responses:
+        '200':
+          description: List of recently modified jobs and possibly a NextToken object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+        '503':
+          description: 'Service unavailable, try again later'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Unexpected error encountered during the search operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

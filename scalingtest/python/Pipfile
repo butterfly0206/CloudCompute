@@ -1,0 +1,12 @@
+[requires]
+python_version = '3.6'
+
+[packages]
+requests = "*"
+tenacity = "*"
+pyyaml = "*"
+bravado = "*"
+junit-xml = "*"
+
+[dev-packages]
+pylint = "*"

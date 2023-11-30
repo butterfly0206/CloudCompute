@@ -1,0 +1,2562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.2.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="compute-test-plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="SERVICE" elementType="Argument">
+            <stringProp name="Argument.name">SERVICE</stringProp>
+            <stringProp name="Argument.value">fpccomp-c-uw2-sb</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PROTOCOL" elementType="Argument">
+            <stringProp name="Argument.name">PROTOCOL</stringProp>
+            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="APIGEE_PREFIX" elementType="Argument">
+            <stringProp name="Argument.name">APIGEE_PREFIX</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="JOB_MANAGER_HOST" elementType="Argument">
+            <stringProp name="Argument.name">JOB_MANAGER_HOST</stringProp>
+            <stringProp name="Argument.value">0.0.0.0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="JOB_MANAGER_PORT" elementType="Argument">
+            <stringProp name="Argument.name">JOB_MANAGER_PORT</stringProp>
+            <stringProp name="Argument.value">8090</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="WORKER_MANAGER_HOST" elementType="Argument">
+            <stringProp name="Argument.name">WORKER_MANAGER_HOST</stringProp>
+            <stringProp name="Argument.value">0.0.0.0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="WORKER_MANAGER_PORT" elementType="Argument">
+            <stringProp name="Argument.name">WORKER_MANAGER_PORT</stringProp>
+            <stringProp name="Argument.value">8091</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="COS_WORKER_SECRET" elementType="Argument">
+            <stringProp name="Argument.name">COS_WORKER_SECRET</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BEARER_TOKEN" elementType="Argument">
+            <stringProp name="Argument.name">BEARER_TOKEN</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="APIGEE_HOST" elementType="Argument">
+            <stringProp name="Argument.name">APIGEE_HOST</stringProp>
+            <stringProp name="Argument.value">developer-dev.api.autodesk.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEARCH_TIMEOUT" elementType="Argument">
+            <stringProp name="Argument.name">SEARCH_TIMEOUT</stringProp>
+            <stringProp name="Argument.value">450</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BATCH_TIMEOUT" elementType="Argument">
+            <stringProp name="Argument.name">BATCH_TIMEOUT</stringProp>
+            <stringProp name="Argument.value">600</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BATCH_WORKER" elementType="Argument">
+            <stringProp name="Argument.name">BATCH_WORKER</stringProp>
+            <stringProp name="Argument.value">bzmw</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="BATCH_QUEUE_WORKER" elementType="Argument">
+            <stringProp name="Argument.name">BATCH_QUEUE_WORKER</stringProp>
+            <stringProp name="Argument.value">bzmqw</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="WORKER" elementType="Argument">
+            <stringProp name="Argument.name">WORKER</stringProp>
+            <stringProp name="Argument.value">bzmecsw</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEARCH_NEXTTOKEN" elementType="Argument">
+            <stringProp name="Argument.name">SEARCH_NEXTTOKEN</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SEARCH_DONE" elementType="Argument">
+            <stringProp name="Argument.name">SEARCH_DONE</stringProp>
+            <stringProp name="Argument.value">FALSE</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="THINK_TIME" elementType="Argument">
+            <stringProp name="Argument.name">THINK_TIME</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="LOOP_DURATION" elementType="Argument">
+            <stringProp name="Argument.name">LOOP_DURATION</stringProp>
+            <stringProp name="Argument.value">10</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="WORK_ALLOWANCE" elementType="Argument">
+            <stringProp name="Argument.name">WORK_ALLOWANCE</stringProp>
+            <stringProp name="Argument.value">300000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+    </TestPlan>
+    <hashTree>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+        <stringProp name="delimiter">\t</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="filename">jmeter-test-plan.csv</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">SERVICE,PROTOCOL,APIGEE_PREFIX,JOB_MANAGER_HOST,JOB_MANAGER_PORT,WORKER_MANAGER_HOST,WORKER_MANAGER_PORT,COS_WORKER_SECRET,BEARER_TOKEN</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">1800</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="TestPlan.comments">Notice Timeouts:
+Response to 75
+Connect to 15s</stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+          <stringProp name="HTTPSampler.implementation">Java</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">15000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">75000</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set bearer token as property" enabled="true">
+          <stringProp name="scriptLanguage">java</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">props.put(&quot;BEARER_TOKEN&quot;, vars.get(&quot;BEARER_TOKEN&quot;));
+</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Create session tag" enabled="true">
+          <stringProp name="scriptLanguage">java</stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="script">import net.minidev.json.JSONObject;
+import java.util.*;
+
+import java.time.Duration;
+import java.time.Instant;
+
+long now = Instant.now().toEpochMilli();
+props.put(&quot;SESSION_TAG&quot;, now.toString());
+
+SampleResult.setIgnore();</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Polling, batching, queueing" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1373789594000</longProp>
+        <longProp name="ThreadGroup.end_time">1373789594000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">60</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="TestPlan.comments">Notice Timeouts:
+Response to 75s
+Connect to 15s</stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">15000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">75000</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Variable" enabled="true">
+          <stringProp name="maximumValue">1000</stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="outputFormat">0000</stringProp>
+          <boolProp name="perThread">true</boolProp>
+          <stringProp name="randomSeed">${__time()}</stringProp>
+          <stringProp name="variableName">random1000</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Init throughput timer" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="-1885980993">Init throughput timer</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM post job" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="969409146">JM post job</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM post batch job" enabled="false">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="-596871468">JM post batch job</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Get or Search (switch)" enabled="true">
+          <stringProp name="SwitchController.value">${SWITCH_VALUE}</stringProp>
+        </SwitchController>
+        <hashTree>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM search job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-617156987">JM search jobs with session tag</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM search job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-617156987">JM search jobs with session tag</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM get job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="761515542">JM get job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM get job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="761515542">JM get job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+        </hashTree>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM poll job" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="-481603763">WM poll jobs</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="WM Heartbeat or Get (switch)" enabled="true">
+          <stringProp name="SwitchController.value">${SWITCH_VALUE}</stringProp>
+        </SwitchController>
+        <hashTree>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM get polled job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1864186161">WM get polled job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1963242801">WM heartbeat job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1963242801">WM heartbeat job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1963242801">WM heartbeat job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+        </hashTree>
+        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="WM Heartbeat or Progress (switch)" enabled="true">
+          <stringProp name="SwitchController.value">${SWITCH_VALUE}</stringProp>
+        </SwitchController>
+        <hashTree>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1963242801">WM heartbeat job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1963242801">WM heartbeat job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1963242801">WM heartbeat job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM progress job 50%" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-157576729">WM progress job 50</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+        </hashTree>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="-1963242801">WM heartbeat job</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM heartbeat job" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="-1963242801">WM heartbeat job</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+        <SwitchController guiclass="SwitchControllerGui" testclass="SwitchController" testname="Complete or Delete (switch)" enabled="true">
+          <stringProp name="SwitchController.value">${SWITCH_VALUE}</stringProp>
+        </SwitchController>
+        <hashTree>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="JM delete job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="1207621317">JM delete job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM complete job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="824157536">WM complete job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM complete job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="824157536">WM complete job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="WM complete job" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="824157536">WM complete job</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+        </hashTree>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Throughput timer" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="1065613106">Throughput controller</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+      </hashTree>
+      <PostThreadGroup guiclass="PostThreadGroupGui" testclass="PostThreadGroup" testname="tearDown" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">900</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </PostThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="TestPlan.comments">Notice Timeouts:
+Response to 75
+Connect to 15s</stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
+          <stringProp name="HTTPSampler.implementation">Java</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">15000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">75000</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Module Controller" enabled="true">
+          <collectionProp name="ModuleController.node_path">
+            <stringProp name="764597751">Test Plan</stringProp>
+            <stringProp name="-137411218">compute-test-plan</stringProp>
+            <stringProp name="-1026716107">Test fragments</stringProp>
+            <stringProp name="-2029190407">JM count completed jobs</stringProp>
+          </collectionProp>
+        </ModuleController>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Test fragments" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Oxygen Auth" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Oxygen Auth request" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="client_id" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${CLIENT_ID}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">client_id</stringProp>
+                </elementProp>
+                <elementProp name="client_secret" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${CLIENT_SECRET}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">client_secret</stringProp>
+                </elementProp>
+                <elementProp name="grant_type" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">client_credentials</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">grant_type</stringProp>
+                </elementProp>
+                <elementProp name="scope" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">data:write</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">scope</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${APIGEE_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/authentication/v1/authenticate</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <boolProp name="HTTPSampler.BROWSER_COMPATIBLE_MULTIPART">true</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="49586">200</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">1</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">BEARER_TOKEN</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.access_token</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">props.put(&quot;BEARER_TOKEN&quot;, vars.get(&quot;BEARER_TOKEN&quot;));</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Init throughput timer" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Init throughput timer" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+
+long nowSeconds = (long)(Instant.now().toEpochMilli() / 1000);
+props.put(&quot;START_ITERATION&quot;, nowSeconds.toString());
+// 1 out of every 1000 jobs we want to delete
+int val = (int)Integer.parseInt(vars.get(&quot;random1000&quot;));
+if (val &lt;= 1) {
+	vars.put(&quot;SWITCH_VALUE&quot;, &quot;0&quot;);
+} else if (val &lt;= 10) {
+	vars.put(&quot;SWITCH_VALUE&quot;, &quot;1&quot;);
+} else if (val &lt;= 300 ) {
+	vars.put(&quot;SWITCH_VALUE&quot;, &quot;2&quot;);
+} else {
+	vars.put(&quot;SWITCH_VALUE&quot;, &quot;3&quot;);
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM post job" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="clear JOB hash" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import java.util.*;
+Dictionary JOB = new Hashtable();
+vars.putObject(&quot;JOB&quot;, JOB);
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="createJob" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;service&quot;: &quot;${SERVICE}&quot;, &#xd;
+	&quot;worker&quot;: &quot;${WORKER}&quot;,&#xd;
+	&quot;tags&quot;: [&quot;${__property(SESSION_TAG)}-${__threadNum}&quot;],&#xd;
+	&quot;payload&quot;: {&#xd;
+		&quot;testDefinition&quot;: {&#xd;
+			&quot;duration&quot;:120,&#xd;
+			&quot;progressInterval&quot;:30,&#xd;
+			&quot;progressUntil&quot;:100,&#xd;
+			&quot;heartbeatInterval&quot;:60,&#xd;
+			&quot;heartbeatTimeout&quot;:75,&#xd;
+			&quot;heartbeatUntil&quot;:360,&#xd;
+			&quot;output&quot;: {&#xd;
+				&quot;status&quot;:&quot;COMPLETE&quot;&#xd;
+			}&#xd;
+		}&#xd;
+	}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/jobs</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">Polling job</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;) || code.equals(&quot;202&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Extract jobID" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+String code = prev.getResponseCode();
+if (code.equals(&quot;200&quot;) || code.equals(&quot;202&quot;)) {
+	JSONParser parser = new JSONParser();
+	JSONObject jo = (JSONObject) parser.parse(prev.getResponseDataAsString());
+	String jobID = (String) jo.get(&quot;jobID&quot;);
+	Dictionary entry = new Hashtable();
+	Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+	if (job == null) {
+		job = new Hashtable();
+	}
+	job.put(&quot;jobID&quot;, jobID);
+	vars.putObject(&quot;JOB&quot;, job);
+} else {	
+	log.warn(&quot;Response code is &quot; + code + &quot;, no job to add&quot;);
+}
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM get job" enabled="true"/>
+        <hashTree>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">1000</stringProp>
+              <stringProp name="RandomTimer.range">1000</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID from job hash" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+vars.put(&quot;GET_JOBID&quot;, null);
+if (job != null) {
+	String jobID = job.get(&quot;jobID&quot;);
+	vars.put(&quot;GET_JOBID&quot;, jobID);
+}
+
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getJob (jm)" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/jobs/${GET_JOBID}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Extract job status and add to hash" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+
+String code = prev.getResponseCode();
+if (code.equals(&quot;200&quot;)) {
+	JSONParser parser = new JSONParser();
+	JSONObject jo = (JSONObject) parser.parse(prev.getResponseDataAsString());
+	String jobID = vars.get(&quot;GET_JOBID&quot;);
+	if (jobID.equals(jo.get(&quot;jobID&quot;))) {
+		String jobStatus = (String) jo.get(&quot;status&quot;);
+		job.put(&quot;status&quot;, jobStatus);
+		vars.putObject(&quot;JOB&quot;, job);
+	} else {
+		log.error(&quot;Polled job &quot; + jobID + &quot; not returned by API (returned &quot;+ jo.get(&quot;jobID&quot;).toString() + &quot;)&quot;);
+		prev.setSuccessful(false);
+	}
+} else {	
+	log.warn(&quot;Response code is &quot; + code + &quot;, no job status to add&quot;);
+}
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM search jobs with session tag" enabled="true"/>
+        <hashTree>
+          <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="SEARCH_NEXTTOKEN" elementType="Argument">
+                <stringProp name="Argument.name">SEARCH_NEXTTOKEN</stringProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </Arguments>
+          <hashTree/>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Reset" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1286723111">Reset Search</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Search loop" enabled="true">
+            <stringProp name="WhileController.condition">${__groovy(&quot;${SEARCH_DONE}&quot; == &quot;FALSE&quot; &amp;&amp; ${JMeterThread.last_sample_ok})}</stringProp>
+          </WhileController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="searchRecentJobs" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="service" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${SERVICE}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">service</stringProp>
+                  </elementProp>
+                  <elementProp name="maxResults" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">5000</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">maxResults</stringProp>
+                  </elementProp>
+                  <elementProp name="tag" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__property(SESSION_TAG)}-${__threadNum}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">tag</stringProp>
+                  </elementProp>
+                  <elementProp name="fromTime" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__property(SESSION_TAG)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">fromTime</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/search/recent</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header and search nextToken" enabled="true">
+                <stringProp name="scriptLanguage">java</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.lang3.StringUtils;
+import java.time.Duration;
+import java.time.Instant;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().removeHeaderNamed(&quot;nextToken&quot;);
+
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));
+
+String nextToken = vars.get(&quot;SEARCH_NEXTTOKEN&quot;);
+if (StringUtils.isNotEmpty(nextToken)) {
+	if (!nextToken.equals(&quot;START&quot;)) {
+		sampler.getHeaderManager().add(new Header(&quot;nextToken&quot;, nextToken ));
+	}
+}</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract nextToken" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">SEARCH_NEXTTOKEN</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.nextToken</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check response code, search timeout" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	long nowSeconds = (long)(Instant.now().toEpochMilli() / 1000);
+	long startSeconds =  (long)(Long.parseLong(vars.get(&quot;START_SEARCH&quot;))/1000);
+	long durationSeconds = nowSeconds - startSeconds;
+	long timeoutSeconds = Long.parseLong(vars.get(&quot;SEARCH_TIMEOUT&quot;));
+	
+	if (durationSeconds &gt; timeoutSeconds) {
+		success = false;
+		AssertionResult.setFailureMessage(&quot;Search job took too long&quot;);
+	}
+
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);	
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">java</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Count and check for our expected job" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">import org.apache.jmeter.assertions.AssertionResult;	
+import org.apache.commons.lang3.StringUtils;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import net.minidev.json.JSONArray;
+import java.util.*;
+
+if (!AssertionResult.isFailure()) {
+	Boolean success = true;
+	int expectedCount = 1;
+	Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+	Boolean found = false;
+	if (job == null) {
+		success = false;
+		AssertionResult.setFailureMessage(&quot;Session saved no jobs, cannot validate search&quot;);
+	} else {
+		String jobID = job.get(&quot;jobID&quot;);
+		if (jobID == null)	{
+			success = false;
+			AssertionResult.setFailureMessage(&quot;Session saved no jobs, expected &quot; + expectedCount.toString() );
+		} else {
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(prev.getResponseDataAsString());
+			JSONObject jo = (JSONObject) obj;
+			JSONArray ja = (JSONArray) jo.get(&quot;jobs&quot;);
+			if (ja != null) {
+				for ( int i = 0; i &lt; ja.size(); i++) {
+					String searchJobID = ja.get(i).get(&quot;jobID&quot;);
+					if (searchJobID.equals(jobID)) {
+						found = true;
+						break;
+					}
+				}
+			}
+			String nextToken = vars.get(&quot;SEARCH_NEXTTOKEN&quot;);
+			if (found) {
+				vars.put(&quot;SEARCH_DONE&quot;, &quot;TRUE&quot;);  // found our job, quit searching
+			} else if (StringUtils.isEmpty(nextToken)) { //if we&apos;re done and didn&apos;t find the job
+				success = false;
+				AssertionResult.setFailureMessage(&quot;Search did not find job in results&quot;);
+			}
+		}
+		AssertionResult.setFailure(!success);
+		SampleResult.setSuccessful(success);
+	}
+}
+
+</stringProp>
+                <stringProp name="scriptLanguage">java</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM delete job" enabled="true"/>
+        <hashTree>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID from job hash" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+if (job != null) {
+	vars.put(&quot;DELETE_JOBID&quot;, job.get(&quot;jobID&quot;));
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="deleteJob" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/jobs/${DELETE_JOBID}</stringProp>
+            <stringProp name="HTTPSampler.method">DELETE</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check job deletion" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+String code = SampleResult.getResponseCode();
+Boolean success = code.equals(&quot;200&quot;);
+
+if (code.equals(&quot;200&quot;)) {
+ 	log.info(&quot;Successfully deleted job &quot; + vars.get(&quot;item&quot;));
+} else {
+	log.warn(&quot;Failed to delete job &quot; + vars.get(&quot;item&quot;) + &quot;, code: &quot; + code.toString() + &quot;, response: &quot; + SampleResult.getResponseMessage());
+}
+
+AssertionResult.setFailure(!success);
+SampleResult.setSuccessful(success);
+</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM poll jobs" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="clear JOB hash" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import java.util.*;
+Dictionary JOB = new Hashtable();
+vars.putObject(&quot;JOB&quot;, JOB);
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">5000</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="pollForJob" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;service&quot;: &quot;${SERVICE}&quot;, &#xd;
+     &quot;worker&quot;: &quot;${WORKER}&quot;&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/poll</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout">65000</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+import java.lang.*;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check that we polled all of our jobs" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+String code = SampleResult.getResponseCode();
+if (code.equals(&quot;200&quot;)) {
+	JSONParser parser = new JSONParser();
+	JSONObject jo = (JSONObject) parser.parse(prev.getResponseDataAsString());
+	String jobID = (String) jo.get(&quot;jobID&quot;);
+	Dictionary job = new Hashtable();
+	job.put(&quot;secret&quot;, (String) jo.get(&quot;jobSecret&quot;));
+	job.put(&quot;jobID&quot;, jobID);
+	vars.putObject(&quot;JOB&quot;, job);
+} else {
+	AssertionResult.setFailureMessage(&quot;Polling found no jobs, expected 1&quot;);
+	AssertionResult.setFailure(true);
+	SampleResult.setSuccessful(false);
+}
+</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM get polled job" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID from job hash" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+vars.put(&quot;GET_JOBID&quot;, null);
+if (job != null) {
+	String jobID = job.get(&quot;jobID&quot;);
+	vars.put(&quot;GET_JOBID&quot;, jobID);
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getJob (wm)" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/jobs/${GET_JOBID}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authentication header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+
+	if (!success) {
+		log.warn(&quot;Failed to retrieved job &quot; + vars.get(&quot;GET_JOBID&quot;));
+	}
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM heartbeat job" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID and jobSecret from job hash" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+if (job != null) {
+	vars.put(&quot;HEARTBEAT_JOBID&quot;, job.get(&quot;jobID&quot;));
+	vars.put(&quot;HEARTBEAT_JOBSECRET&quot;, (String)job.get(&quot;secret&quot;));
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postHeartbeat" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{ &quot;jobID&quot;: &quot;${HEARTBEAT_JOBID}&quot;, &quot;jobSecret&quot;: &quot;${HEARTBEAT_JOBSECRET}&quot; }</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/heartbeat</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authentiction header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+
+	if (!success) {
+		log.warn(&quot;Failed to call heartbeat on job &quot; + vars.get(&quot;HEARTBEAT_JOBID&quot;));
+	}
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM progress job 25" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID and jobSecret from array" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+if (job != null) {
+	vars.put(&quot;PROGRESS_JOBID&quot;, job.get(&quot;jobID&quot;));
+	vars.put(&quot;PROGRESS_JOBSECRET&quot;, (String)job.get(&quot;secret&quot;));
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postProgress" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;jobID&quot;: &quot;${PROGRESS_JOBID}&quot;, &#xd;
+	&quot;jobSecret&quot;: &quot;${PROGRESS_JOBSECRET}&quot;,&#xd;
+	&quot;percent&quot;: 25,&#xd;
+	&quot;details&quot;: {&quot;arbitrary&quot;: &quot;data&quot;}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/progress</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authentication header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+
+	if (!success) {
+		log.warn(&quot;Failed to call progress on job &quot; + vars.get(&quot;PROGRESS_JOBID&quot;));
+	}
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM progress job 50" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID and jobSecret from array" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+if (job != null) {
+	vars.put(&quot;PROGRESS_JOBID&quot;, job.get(&quot;jobID&quot;));
+	vars.put(&quot;PROGRESS_JOBSECRET&quot;, (String)job.get(&quot;secret&quot;));
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postProgress" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;jobID&quot;: &quot;${PROGRESS_JOBID}&quot;, &#xd;
+	&quot;jobSecret&quot;: &quot;${PROGRESS_JOBSECRET}&quot;,&#xd;
+	&quot;percent&quot;: 50,&#xd;
+	&quot;details&quot;: {&quot;arbitrary&quot;: &quot;data&quot;}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/progress</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authentication header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+
+	if (!success) {
+		log.warn(&quot;Failed to call progress on job &quot; + vars.get(&quot;PROGRESS_JOBID&quot;));
+	}
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM progress job 75" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID and jobSecret from array" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+if (job != null) {
+	vars.put(&quot;PROGRESS_JOBID&quot;, job.get(&quot;jobID&quot;));
+	vars.put(&quot;PROGRESS_JOBSECRET&quot;, (String)job.get(&quot;secret&quot;));
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postProgress" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;jobID&quot;: &quot;${PROGRESS_JOBID}&quot;, &#xd;
+	&quot;jobSecret&quot;: &quot;${PROGRESS_JOBSECRET}&quot;,&#xd;
+	&quot;percent&quot;: 75,&#xd;
+	&quot;details&quot;: {&quot;arbitrary&quot;: &quot;data&quot;}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/progress</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authentication header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+
+	if (!success) {
+		log.warn(&quot;Failed to call progress on job &quot; + vars.get(&quot;PROGRESS_JOBID&quot;));
+	}
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="WM complete job" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Set jobID and jobSecret from array" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+Dictionary job = (Dictionary) vars.getObject(&quot;JOB&quot;);
+if (job != null) {
+	vars.put(&quot;COMPLETE_JOBID&quot;, job.get(&quot;jobID&quot;));
+	vars.put(&quot;COMPLETE_JOBSECRET&quot;, (String)job.get(&quot;secret&quot;));
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">500</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postComplete" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;jobID&quot;: &quot;${COMPLETE_JOBID}&quot;, &#xd;
+	&quot;jobSecret&quot;: &quot;${COMPLETE_JOBSECRET}&quot;,&#xd;
+	&quot;status&quot;: &quot;COMPLETED&quot;,&#xd;
+	&quot;result&quot; : {&quot;arbitrary&quot; : &quot;data&quot;},&#xd;
+	&quot;error&quot; : &quot;&quot;,&#xd;
+	&quot;details&quot; : {&quot;moreArbitrary&quot; : &quot;DATA&quot;}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${WORKER_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${WORKER_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v1/complete</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header (worker secret)" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.codec.binary.Base64;
+
+String credential = vars.get(&quot;SERVICE&quot;) + &quot;:&quot; + vars.get(&quot;COS_WORKER_SECRET&quot;);
+byte[] encodedCredential = Base64.encodeBase64(credential.getBytes());
+String authHeader = new String(encodedCredential);
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Basic &quot; + authHeader));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+	
+	if (!success) {
+		log.warn(&quot;Failed to complete job &quot; + vars.get(&quot;COMPLETE_JOBID&quot;));
+	}
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM post batch job" enabled="true"/>
+        <hashTree>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">1000</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="createJob" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;service&quot;: &quot;${SERVICE}&quot;, &#xd;
+	&quot;worker&quot;: &quot;${BATCH_WORKER}&quot;,&#xd;
+	&quot;tags&quot;: [&quot;${__property(SESSION_TAG)}&quot;],&#xd;
+	&quot;payload&quot;: {&#xd;
+		&quot;testDefinition&quot;: {&#xd;
+			&quot;duration&quot;:0,&#xd;
+			&quot;progressInterval&quot;:0,&#xd;
+			&quot;progressUntil&quot;:100,&#xd;
+			&quot;heartbeatInterval&quot;:0,&#xd;
+			&quot;heartbeatUntil&quot;:0,&#xd;
+			&quot;output&quot;: {&#xd;
+				&quot;status&quot;:&quot;COMPLETE&quot;&#xd;
+			}&#xd;
+		}&#xd;
+	}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/jobs</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">Batch job (non-queued)</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;) || code.equals(&quot;202&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Extract jobID" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+String code = prev.getResponseCode();
+if (code.equals(&quot;200&quot;) || code.equals(&quot;202&quot;)) {
+	JSONParser parser = new JSONParser();
+	JSONObject jo = (JSONObject) parser.parse(prev.getResponseDataAsString());
+	String jobID = (String) jo.get(&quot;jobID&quot;);
+} else {	
+	log.warn(&quot;Response code is &quot; + code + &quot;, no job created!&quot;);
+}
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM post batch job (queued)" enabled="true"/>
+        <hashTree>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">2000</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="createJob" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+	&quot;service&quot;: &quot;${SERVICE}&quot;, &#xd;
+	&quot;worker&quot;: &quot;${BATCH_QUEUE_WORKER}&quot;,&#xd;
+	&quot;tags&quot;: [&quot;${__property(SESSION_TAG)}&quot;],&#xd;
+	&quot;payload&quot;: {&#xd;
+		&quot;testDefinition&quot;: {&#xd;
+			&quot;duration&quot;:0,&#xd;
+			&quot;progressInterval&quot;:0,&#xd;
+			&quot;progressUntil&quot;:100,&#xd;
+			&quot;heartbeatInterval&quot;:0,&#xd;
+			&quot;heartbeatUntil&quot;:0,&#xd;
+			&quot;output&quot;: {&#xd;
+				&quot;status&quot;:&quot;COMPLETE&quot;&#xd;
+			}&#xd;
+		}&#xd;
+	}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+            <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/jobs</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">Batch job (queued)</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Check for success" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import org.apache.jmeter.assertions.AssertionResult;
+
+if (!AssertionResult.isFailure()) {
+	String code = SampleResult.getResponseCode();
+	Boolean success = code.equals(&quot;200&quot;) || code.equals(&quot;202&quot;);
+	
+	AssertionResult.setFailure(!success);
+	SampleResult.setSuccessful(success);
+}</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Extract jobID" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import java.util.*;
+
+String code = prev.getResponseCode();
+if (code.equals(&quot;200&quot;) || code.equals(&quot;202&quot;)) {
+	JSONParser parser = new JSONParser();
+	JSONObject jo = (JSONObject) parser.parse(prev.getResponseDataAsString());
+	String jobID = (String) jo.get(&quot;jobID&quot;);
+} else {	
+	log.warn(&quot;Response code is &quot; + code + &quot;, no job created!&quot;);
+}
+</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="JM count completed jobs" enabled="true"/>
+        <hashTree>
+          <ModuleController guiclass="ModuleControllerGui" testclass="ModuleController" testname="Reset" enabled="true">
+            <collectionProp name="ModuleController.node_path">
+              <stringProp name="764597751">Test Plan</stringProp>
+              <stringProp name="-137411218">compute-test-plan</stringProp>
+              <stringProp name="-1026716107">Test fragments</stringProp>
+              <stringProp name="-1286723111">Reset Search</stringProp>
+            </collectionProp>
+          </ModuleController>
+          <hashTree/>
+          <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="SEARCH_NEXTTOKEN" elementType="Argument">
+                <stringProp name="Argument.name">SEARCH_NEXTTOKEN</stringProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="SEARCH_DONE" elementType="Argument">
+                <stringProp name="Argument.name">SEARCH_DONE</stringProp>
+                <stringProp name="Argument.value">FALSE</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </Arguments>
+          <hashTree/>
+          <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
+            <intProp name="ActionProcessor.action">1</intProp>
+            <intProp name="ActionProcessor.target">0</intProp>
+            <stringProp name="ActionProcessor.duration">0</stringProp>
+          </TestAction>
+          <hashTree>
+            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Pause" enabled="true">
+              <stringProp name="ConstantTimer.delay">${WORK_ALLOWANCE}</stringProp>
+              <stringProp name="RandomTimer.range">100</stringProp>
+            </UniformRandomTimer>
+            <hashTree/>
+          </hashTree>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Search loop" enabled="true">
+            <stringProp name="WhileController.condition">${__groovy(&quot;${SEARCH_DONE}&quot; == &quot;FALSE&quot;)}</stringProp>
+          </WhileController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="JM search recent jobs" enabled="true">
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="Variables pré-définies" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="service" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${SERVICE}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">service</stringProp>
+                  </elementProp>
+                  <elementProp name="maxResults" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">1000</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">maxResults</stringProp>
+                  </elementProp>
+                  <elementProp name="tag" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__property(SESSION_TAG)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">tag</stringProp>
+                  </elementProp>
+                  <elementProp name="fromTime" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${__property(SESSION_TAG)}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">fromTime</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${JOB_MANAGER_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${JOB_MANAGER_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${APIGEE_PREFIX}/api/v1/search/recent</stringProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Set authorization header and search nextToken" enabled="true">
+                <stringProp name="scriptLanguage">java</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.jmeter.protocol.http.control.Header;
+import org.apache.commons.lang3.StringUtils;
+import java.time.Duration;
+import java.time.Instant;
+
+sampler.getHeaderManager().removeHeaderNamed(&quot;Authorization&quot;);
+sampler.getHeaderManager().removeHeaderNamed(&quot;nextToken&quot;);
+
+sampler.getHeaderManager().add(new Header(&quot;Authorization&quot;, &quot;Bearer &quot; + props.get(&quot;BEARER_TOKEN&quot;)));
+
+String nextToken = vars.get(&quot;SEARCH_NEXTTOKEN&quot;);
+if (StringUtils.isNotEmpty(nextToken)) {
+	if (!nextToken.equals(&quot;START&quot;)) {
+		sampler.getHeaderManager().add(new Header(&quot;nextToken&quot;, nextToken ));
+	}
+}</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract nextToken" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">SEARCH_NEXTTOKEN</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.nextToken</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Count and check for completed jobs" enabled="true">
+                <stringProp name="scriptLanguage">java</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import org.apache.jmeter.assertions.AssertionResult;	
+import org.apache.commons.lang3.StringUtils;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.JSONObject;
+import net.minidev.json.JSONArray;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.*;
+
+// don&apos;t report the search to Jmeter
+prev.setIgnore();
+
+long durationIndex = 1;
+if (vars.get(&quot;JOB_DURATIONS&quot;) != null) {
+	durationIndex = (long)Long.parseLong(vars.get(&quot;JOB_DURATIONS&quot;));
+}
+
+Boolean success = true;
+JSONParser parser = new JSONParser();
+Object obj = parser.parse(prev.getResponseDataAsString());
+JSONObject jo = (JSONObject) obj;
+if (jo != null) {
+	JSONArray ja = (JSONArray) jo.get(&quot;jobs&quot;);
+	if (ja != null) {
+		for ( int i = 0; i &lt; ja.size(); i++) {
+			// build a list of values indicating job completion times, use 0 for non-COMPLETED jobs
+			String status = ja.get(i).get(&quot;status&quot;);
+			String jobID = ja.get(i).get(&quot;jobID&quot;);
+			long duration = 0;
+			long creationTime = Instant.parse(ja.get(i).get(&quot;creationTime&quot;)).toEpochMilli();
+			long modificationTime = Long.parseLong(ja.get(i).get(&quot;modificationTime&quot;));
+			long duration = Math.max(modificationTime - creationTime, 0); 
+			if (!status.equals(&quot;COMPLETED&quot;)) {
+				duration = -duration;
+			}
+			String name = &quot;DURATION_VALUE_&quot; + durationIndex.toString(); 
+			vars.put(name, jobID + &quot;,&quot; + status + &quot;,&quot; + duration.toString() );
+			durationIndex = durationIndex + 1;
+		}
+	}
+}
+
+String nextToken = vars.get(&quot;SEARCH_NEXTTOKEN&quot;);
+if (StringUtils.isEmpty(nextToken)) { //if we&apos;re done and didn&apos;t find the job
+	vars.put(&quot;SEARCH_DONE&quot;, &quot;TRUE&quot;);  // found our job, quit searching
+}
+
+vars.put(&quot;JOB_DURATIONS&quot;, durationIndex.toString());
+</stringProp>
+              </JSR223PostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
+            <stringProp name="ForeachController.inputVal">DURATION_VALUE</stringProp>
+            <stringProp name="ForeachController.returnVal">returnVar</stringProp>
+            <boolProp name="ForeachController.useSeparator">true</boolProp>
+          </ForeachController>
+          <hashTree>
+            <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Batch job completed" enabled="true">
+              <stringProp name="scriptLanguage">java</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+
+long index = 1 + Long.parseLong(vars.get(&quot;__jm__ForEach Controller__idx&quot;));
+String name = &quot;DURATION_VALUE_&quot; + index.toString();
+String[] values = vars.get(name).split(&quot;,&quot;);
+String jobId = values[0];
+String status = values[1];
+long duration = (long)Long.parseLong(values[2]);
+boolean success = duration &gt; 0;
+if (success) {
+	SampleResult.setResponseCode(&quot;200&quot;);
+} else {
+	SampleResult.setResponseCode(&quot;300&quot;);
+	duration = -duration;
+}
+long end = (long)Instant.now().toEpochMilli();
+long start = end - duration;
+
+SampleResult.setSuccessful(success);
+SampleResult.setResponseMessage(&quot;Batch job status = &quot; + status);
+
+java.lang.reflect.Field startTime = SampleResult.getClass().getDeclaredField(&quot;startTime&quot;);
+startTime.setAccessible(true);
+startTime.set(SampleResult, start);
+java.lang.reflect.Field elapsedTime = SampleResult.getClass().getDeclaredField(&quot;elapsedTime&quot;);
+elapsedTime.setAccessible(true);
+elapsedTime.set(SampleResult, duration);</stringProp>
+            </JSR223Sampler>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Reset Search" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Reset" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import java.time.Instant;
+String now = Instant.now().toEpochMilli().toString();
+vars.put(&quot;START_SEARCH&quot;, now);
+vars.put(&quot;SEARCH_NEXTTOKEN&quot;, &quot;START&quot;);
+vars.put(&quot;SEARCH_DONE&quot;, &quot;FALSE&quot;);
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Throughput controller" enabled="true"/>
+        <hashTree>
+          <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Throughput timer" enabled="true">
+            <stringProp name="scriptLanguage">java</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import java.time.Duration;
+import java.time.Instant;
+import java.lang.*;
+long startSeconds =  (long)(Long.parseLong(props.get(&quot;START_ITERATION&quot;)));
+long nowSeconds = (long)(Instant.now().toEpochMilli() / 1000);
+long durationSeconds = nowSeconds - startSeconds;
+long desiredSeconds = (long)(Long.parseLong(vars.get(&quot;LOOP_DURATION&quot;)));
+long thinkTime = Math.max(desiredSeconds-durationSeconds, 0);
+if (thinkTime &gt; 0) {
+	Thread.sleep(thinkTime*1000); //milliseconds
+}
+SampleResult.setIgnore();</stringProp>
+          </JSR223Sampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>true</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>true</responseData>
+            <samplerData>true</samplerData>
+            <xml>true</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>true</responseHeaders>
+            <requestHeaders>true</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <fileName>true</fileName>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

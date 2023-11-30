@@ -1,0 +1,114 @@
+# Compiled class file
+*.class
+
+# XCode stuff
+.factorypath
+
+# Test results
+test-results.xml
+
+# Coverage data
+jacoco.exec
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+.m2
+.swagger-codegen
+.DS_Store
+target
+.metadata
+.idea/*
+!.idea/saveactions_settings.xml
+**/.idea
+jetty
+
+*.iml
+*~
+*/.settings
+*/.classpath
+*/.project
+*/.vscode
+*/target
+.java-version
+.project
+.settings/
+.vscode
+**/.venv/
+venv
+
+*.pyc
+
+
+*.dll
+*.dylib
+*.so
+
+# DynamoDB Libraries
+native-libs
+
+# External projects downloaded via automation
+embrace-gatekeeper
+common/src/test/resources/adf-collection/
+
+# test-lambda generated files
+test-lambda/api.yaml
+test-lambda/swaggergen-config.json
+test-lambda/jmclient/docs/
+test-lambda/jmclient/.openapi-generator/
+test-lambda/jmclient/api/
+test-lambda/jmclient/gradle/
+test-lambda/jmclient/pom.xml
+test-lambda/jmclient/src/main/AndroidManifest.xml
+test-lambda/jmclient/README.md
+test-lambda/jmclient/gradle/wrapper/gradle-wrapper.properties
+test-lambda/jmclient/gradle/wrapper/gradle-wrapper.jar
+test-lambda/jmclient/git_push.sh
+test-lambda/jmclient/.travis.yml
+test-lambda/jmclient/.openapi-generator/VERSION
+
+# Auto generated gradle files
+build.gradle
+settings.gradle
+build.sbt
+gradlew
+gradle.properties
+gradlew.bat
+
+*.exec
+
+# Generated client code
+job-manager/client-csharp/
+job-manager/client/
+worker-manager/client-csharp/
+worker-manager/client/
+
+
+job-manager/.openapi-generator/
+worker-manager/.openapi-generator/
+test/python/.openapi-generator/
+
+# test config
+test/python/job-manager.yaml
+test/python/worker-manager.yaml
+
+pom.xml.versionsBackup
+
+/docker-output

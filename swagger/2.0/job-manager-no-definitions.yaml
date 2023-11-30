@@ -1,0 +1,264 @@
+# MAINTENANCE WARNING
+# DO NOT MODIFY job-manager.yaml and worker-manager.yaml directly. Modify model-definitions.yaml
+# and/or worker-manager-no-definitions.yaml and job-manager-no-definitions.yaml instead,
+# then run the gen_wm_server.sh or .bat and gen_jm_server.sh or .bat scripts to produce
+# job-manager.yaml and worker-manager.yaml; then check those in.
+# MAINTENANCE WARNING
+swagger: '2.0'
+info:
+  title: CloudOS Compute API
+  version: 1.0.19
+  description: >
+    CloudOS Compute API for batch style workloads in Autodesk. Developers can
+    register compute worker types by following the cloudOS2.0 onboarding
+    process. Users can submit jobs against registered worker types. The system
+    treats input and output as opaque JSON payloads that must confirm to the
+    JSON schema specified by the worker documentation outside this system. All
+    APIs are used with the /api/v1 prefix.
+  termsOfService: >-
+    https://www.autodesk.com/company/legal-notices-trademarks/terms-of-service-autodesk360-web-services/forge-platform-web-services-api-terms-of-service
+  contact:
+    email: cloudos-compute@autodesk.com
+  license:
+    name: Autodesk
+    url: 'http://download.autodesk.com/us/FY14/Suites/LSA/en-US/lsa.html'
+tags:
+  - name: developers
+    description: Operations available to CloudOS Compute clients
+  - name: admins
+    description: Secured Admin-only calls
+basePath: /api/v1
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /healthcheck:
+    get:
+      operationId: healthcheckGet
+      tags:
+        - admins
+      summary: Health Check
+      description: >-
+        Returns the health of the Service with details. If health is OK, returns
+        200.
+      parameters:
+        - in: header
+          name: x-vault-token
+          required: false
+          type: string
+        - in: header
+          name: x-user
+          required: false
+          type: string
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/HealthCheckResponse'
+  /jobs:
+    post:
+      tags:
+        - developers
+      summary: Creates a job in the system
+      operationId: createJob
+      description: >
+        Creates a job for a particular compute worker type. Jobs can be seen as nearly immutable
+        from the client point of view. Once the job is created, only its tags can be modified.
+        A job will go through its own state machine and succeed or fail for various
+        reasons including a worker-specific (defaults to 1 hour) or a worker
+        no-longer heartbeating its progress (by default, required every 2
+        minutes). All jobs will be deleted from the system after 30 days of
+        lifetime. Input payload for the job must comply with the JSON
+        specification provided by the job worker developer.
+      parameters:
+        - name: jobArgs
+          in: body
+          description: Job creation arguments
+          required: true
+          schema:
+            $ref: '#/definitions/JobArgs'
+        - name: noBatch
+          in: query
+          description: >-
+            True to tell the Job Manager not to schedule a batch worker (e.g. so
+            a test worker can pick it up via polling)
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: job created and either scheduled or queued
+          schema:
+            $ref: '#/definitions/Job'
+        '202':
+          description: job created but with schedule pending
+          schema:
+            $ref: '#/definitions/Job'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/jobs/{id}':
+    get:
+      description: Returns a single job for given job ID
+      operationId: getJob
+      tags:
+        - developers
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to fetch
+          required: true
+          type: string
+      responses:
+        '200':
+          description: job details response
+          schema:
+            $ref: '#/definitions/Job'
+        '404':
+          description: job not found
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      description: >
+        Deletes a single job for given job ID. A job can be deleted at any stage
+        of its lifecycle. Since jobs are immutable, delete is synonymous to
+        cancel and no separate cancel api is needed.
+      operationId: deleteJob
+      tags:
+        - developers
+      parameters:
+        - name: id
+          in: path
+          description: ID of job to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: job deleted
+        '400':
+          description: job id is invalid or trying to delete completed job
+        '409':
+          description: job is already in a terminal state
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/jobs/{jobId}/tags/{tagName}':
+    put:
+      description: Add a new tag for given job ID.
+      operationId: addTag
+      tags:
+        - developers
+      parameters:
+        - name: jobId
+          in: path
+          description: ID of job to add tag
+          required: true
+          type: string
+        - name: tagName
+          in: path
+          description: tag name to be added
+          required: true
+          type: string
+      responses:
+        '200':
+          description: tag added
+        '304':
+          description: The tag does exist already
+        '404':
+          description: job not found
+    delete:
+      description: Delete a tag for given job ID.
+      operationId: deleteTag
+      tags:
+        - developers
+      parameters:
+        - name: jobId
+          in: path
+          description: ID of job to delete tag
+          required: true
+          type: string
+        - name: tagName
+          in: path
+          description: tag name to be removed
+          required: true
+          type: string
+      responses:
+        '200':
+          description: tag removed
+        '304':
+          description: The tag does not exist
+        '404':
+          description: The job was not found
+  /search/recent:
+    get:
+      operationId: searchRecentJobs
+      tags:
+        - developers
+      description: >
+        Returns any recent job regardless of status within the time scope. The
+        item order in the pages returned is arbitrary. A single query operation
+        can retrieve a variable number of items, limited by the lesser of a
+        maximum of 1 MB of data or maxResults (# of items per page).
+      summary: 'Search recently (up to 30 days) modified jobs, regardless of status.'
+      parameters:
+        - name: service
+          in: query
+          required: true
+          type: string
+          description: Your appdef moniker
+        - name: maxResults
+          in: query
+          required: true
+          description: >
+            Maximum number of results to return for each query page (may be
+            limited still by aggregate data size <= 1 MB)
+          type: integer
+          format: int32
+          default: 100
+        - name: fromTime
+          in: query
+          required: false
+          description: >
+            Start searching from this time onwards, expressed in milliseconds
+            since midnight January 1, 1970.
+          type: string
+        - name: toTime
+          in: query
+          required: false
+          description: >
+            Start searching up to and including this time, expressed in
+            milliseconds since midnight January 1, 1970.
+          type: string
+        - name: tag
+          in: query
+          required: false
+          type: string
+          description: Filter your search results by this tag.
+        - name: nextToken
+          in: header
+          required: false
+          description: >
+            Internal token used for search pagination, returned in search
+            results for queries which span multiple pages
+          type: string
+          format: base64
+      responses:
+        '200':
+          description: List of recently modified jobs and possibly a NextToken object
+          schema:
+            $ref: '#/definitions/SearchResult'
+        '503':
+          description: 'Service unavailable, try again later'
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error encountered during the search operation
+          schema:
+            $ref: '#/definitions/Error'
